@@ -1,19 +1,16 @@
-import { Button } from "./components/ui/button";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Default from "./pages/Default";
 
 export default function App() {
-
-  const handleClick = () => {
-    alert("Teste");
-  }
-
   return (
-    <div className="flex flex-col w-100 items-center">
-      <h1 className="text-3xl font-bold underline text-blue-900">
-        Hello world!
-      </h1>
-      <Button
-        onClick={handleClick}
-      >Teste</Button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={ <Default/> } />
+        <Route path="/home" element={ <Home/> } />
+        <Route path="/login" element= { <Login /> }/>
+      </Routes>
+    </BrowserRouter>
   )
 }
