@@ -20,10 +20,13 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_patient")
 public class PatientModel {
