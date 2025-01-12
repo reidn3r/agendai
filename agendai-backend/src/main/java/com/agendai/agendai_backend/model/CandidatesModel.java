@@ -25,8 +25,6 @@ public class CandidatesModel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String status; // ?
-
     private int ranking;
 
     @ManyToOne
@@ -35,5 +33,4 @@ public class CandidatesModel {
     @OneToOne
     @Nullable
     private ConsultationModel consultation;
-
 }

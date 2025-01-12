@@ -7,12 +7,12 @@ import com.agendai.agendai_backend.model.SecretaryModel;
 import lombok.Data;
 
 @Data
-public class ValidatedDTO {
+public class ValidatedConsultationDTO {
     private final PatientModel patient;
     private final MedicModel medic;
     private final SecretaryModel secretary;
 
-    public ValidatedDTO(PatientModel patient, MedicModel medic, SecretaryModel secretary) {
+    public ValidatedConsultationDTO(PatientModel patient, MedicModel medic, SecretaryModel secretary) {
         this.patient = patient;
         this.medic = medic;
         this.secretary = secretary;

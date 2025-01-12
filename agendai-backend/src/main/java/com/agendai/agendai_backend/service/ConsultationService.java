@@ -1,5 +1,8 @@
 package com.agendai.agendai_backend.service;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -7,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.agendai.agendai_backend.DTO.Consultation.ConsultationDTO;
-import com.agendai.agendai_backend.DTO.Consultation.ValidatedDTO;
+import com.agendai.agendai_backend.DTO.Consultation.ConsultationResponseDTO;
+import com.agendai.agendai_backend.DTO.Consultation.ValidatedConsultationDTO;
+import com.agendai.agendai_backend.model.CandidatesModel;
 import com.agendai.agendai_backend.model.ConsultationModel;
 import com.agendai.agendai_backend.model.MedicModel;
 import com.agendai.agendai_backend.model.PatientModel;
 import com.agendai.agendai_backend.model.SecretaryModel;
+import com.agendai.agendai_backend.repository.CandidatesRepository;
 import com.agendai.agendai_backend.repository.ConsultationRepository;
 import com.agendai.agendai_backend.repository.MedicRepositroy;
 import com.agendai.agendai_backend.repository.PatientRepository;
@@ -32,33 +38,93 @@ public class ConsultationService {
     @Autowired
     private ConsultationRepository consultationRepository;
 
-    public ConsultationModel createConsultation(ConsultationDTO data) throws Exception {
-        ValidatedDTO validatedPayload = this.validPayload(data);
+    @Autowired
+    private CandidatesRepository candidatesRepository;
+
+    // Map que mantém ranking/Posicao na fila de agendamento
+    private Map<UUID, Map<UUID, Integer>> consultationRankings = new HashMap<>();
+
+    public ConsultationResponseDTO createConsultation(ConsultationDTO data) throws Exception {
+        // Verifica se médico, paciente e secretária são existentes no sistema
+        ValidatedConsultationDTO validatedPayload = this.validPayload(data);
+
+        // Verifica se paciente já tem consulta nesse horário
+        if (this.isPatientScheduled(validatedPayload.getPatient().getId(), data.date()))
+            throw new Exception("Paciente já possui consulta nesse horário");
+
+        /*
+         * Verifica se há uma consulta marcada nesse horário.
+         * Caso houver, coloca na fila de espera.
+         * Caso contrário, marca a consulta.
+         */
+        Optional<ConsultationModel> foundConsultation = this
+                .isScheduleAvailable(validatedPayload.getMedic().getId(), data.date());
+        if (foundConsultation.isPresent()) {
+            ConsultationResponseDTO response = this.pushToCandidatesList(validatedPayload, foundConsultation.get());
+            return response;
+        }
 
         PatientModel foundPatient = validatedPayload.getPatient();
         MedicModel foundMedic = validatedPayload.getMedic();
         SecretaryModel foundSecretary = validatedPayload.getSecretary();
 
         ConsultationModel newConsultationModel = new ConsultationModel(null,
-                data.data(), foundSecretary, foundMedic, foundPatient, null);
+                data.date(), foundSecretary, foundMedic, foundPatient, null);
+
+        ConsultationModel savedConsultation = consultationRepository.save(newConsultationModel);
 
         /*
-         * TODO: ENVIAR NOTIFICAÇÃO POR EMAIL AO USUÁRIO!!!!!!!!!!!!!!!!!!!
+         * TODO: ENVIAR NOTIFICAÇÃO POR EMAIL AO USUÁRIO!!!
          * - Se possível, de forma assíncrona
          */
 
-        return consultationRepository.save(newConsultationModel);
+        return ConsultationResponseDTO.fromModel(savedConsultation);
     }
 
-    public void deleteConsultation(UUID id) throws Exception {
+    public UUID deleteConsultationById(UUID id) throws Exception {
         Optional<ConsultationModel> foundConsultation = consultationRepository.findById(id);
         if (foundConsultation.isEmpty())
             throw new Exception("Consulta nao encontrada");
 
+        // Remove do ranking
+        consultationRankings.remove(id);
+
+        // Deleta do db
         consultationRepository.deleteById(id);
+        return id;
     }
 
-    private ValidatedDTO validPayload(ConsultationDTO data) throws Exception {
+    private Optional<ConsultationModel> isScheduleAvailable(UUID medicId, LocalDateTime date) {
+        return consultationRepository.findByMedic_IdAndDate(medicId, date);
+    }
+
+    private boolean isPatientScheduled(UUID patientId, LocalDateTime date) {
+        return consultationRepository.existsByPatient_IdAndDate(patientId, date);
+    }
+
+    private ConsultationResponseDTO pushToCandidatesList(ValidatedConsultationDTO validatedPayload,
+            ConsultationModel foundConsultation) {
+
+        Map<UUID, Integer> rankingMap = consultationRankings.computeIfAbsent(
+                foundConsultation.getId(),
+                k -> new HashMap<>());
+
+        // Calcula o ranking
+        int newRanking = rankingMap.size(); // 0-based ranking
+
+        // Armazena no map
+        rankingMap.put(validatedPayload.getPatient().getId(), newRanking);
+
+        CandidatesModel newCandidate = new CandidatesModel(null, newRanking,
+                validatedPayload.getPatient(), foundConsultation);
+        candidatesRepository.save(newCandidate);
+
+        foundConsultation.setSecretary(validatedPayload.getSecretary());
+        foundConsultation.setPatient(validatedPayload.getPatient());
+        return ConsultationResponseDTO.fromModel(foundConsultation);
+    }
+
+    private ValidatedConsultationDTO validPayload(ConsultationDTO data) throws Exception {
         Optional<PatientModel> foundPatient = patientRepository.findById(data.patientId());
         if (foundPatient.isEmpty())
             throw new Exception("Paciente não encontrado");
@@ -71,7 +137,8 @@ public class ConsultationService {
         if (foundSecretary.isEmpty())
             throw new Exception("Secretária não encontrada");
 
-        ValidatedDTO validatedDTO = new ValidatedDTO(foundPatient.get(), foundMedic.get(), foundSecretary.get());
+        ValidatedConsultationDTO validatedDTO = new ValidatedConsultationDTO(foundPatient.get(), foundMedic.get(),
+                foundSecretary.get());
         return validatedDTO;
     }
 }

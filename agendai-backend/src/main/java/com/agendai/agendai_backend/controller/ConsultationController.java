@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agendai.agendai_backend.DTO.Consultation.ConsultationDTO;
+import com.agendai.agendai_backend.DTO.Consultation.ConsultationResponseDTO;
 import com.agendai.agendai_backend.model.ConsultationModel;
 import com.agendai.agendai_backend.service.ConsultationService;
 
@@ -26,14 +27,14 @@ public class ConsultationController {
     private ConsultationService consultationService;
 
     @PostMapping("/create")
-    public ResponseEntity<ConsultationModel> createConsultation(@RequestBody @Valid ConsultationDTO data)
+    public ResponseEntity<ConsultationResponseDTO> createConsultation(@RequestBody @Valid ConsultationDTO data)
             throws Exception {
         return ResponseEntity.status(201).body(consultationService.createConsultation(data));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<UUID> deleteConsultation(@PathVariable UUID id) throws Exception {
-        consultationService.deleteConsultation(id);
-        return ResponseEntity.status(200).body(id);
+        UUID deletedId = consultationService.deleteConsultationById(id);
+        return ResponseEntity.status(200).body(deletedId);
     }
 }

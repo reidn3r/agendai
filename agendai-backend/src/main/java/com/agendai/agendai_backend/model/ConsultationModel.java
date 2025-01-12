@@ -1,6 +1,5 @@
 package com.agendai.agendai_backend.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ public class ConsultationModel {
     private UUID id;
 
     @NotNull
-    private LocalDateTime data;
+    private LocalDateTime date;
 
     @ManyToOne
     SecretaryModel secretary;

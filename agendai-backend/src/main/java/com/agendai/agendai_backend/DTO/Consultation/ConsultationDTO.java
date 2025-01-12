@@ -8,9 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import jakarta.validation.constraints.NotNull;
 
 public record ConsultationDTO(
-                @NotNull @DateTimeFormat LocalDateTime data,
-                @NotNull UUID secretaryId,
-                @NotNull UUID medicId,
-                @NotNull UUID patientId) {
+        @NotNull @DateTimeFormat LocalDateTime date,
+        @NotNull UUID secretaryId,
+        @NotNull UUID medicId,
+        @NotNull UUID patientId) {
 
 }

@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.agendai.agendai_backend.DTO.Professional.IProfessional;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +38,7 @@ public class SecretaryModel implements IProfessional {
     private String cpf;
 
     @OneToMany(mappedBy = "secretary")
+    @JsonIgnore // Referencia ciclica ao criar uma nova consulta
     private List<ConsultationModel> consultations;
 
     public SecretaryModel(String name, String cpf) {
