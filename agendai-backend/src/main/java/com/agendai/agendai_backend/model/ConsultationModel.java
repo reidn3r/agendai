@@ -1,6 +1,7 @@
 package com.agendai.agendai_backend.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.annotation.Nullable;
@@ -29,14 +30,7 @@ public class ConsultationModel {
     private UUID id;
 
     @NotNull
-    private LocalDate data;
-
-    @NotNull
-    private String status;
-
-    // @CreatedDate
-    // @Column(name = "created_at", updatable = false)
-    // private Instant createdAt;
+    private LocalDateTime data;
 
     @ManyToOne
     SecretaryModel secretary;

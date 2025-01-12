@@ -1,4 +1,4 @@
-package com.agendai.agendai_backend.DTO;
+package com.agendai.agendai_backend.DTO.Patient;
 
 public record PatientDTO() {
 

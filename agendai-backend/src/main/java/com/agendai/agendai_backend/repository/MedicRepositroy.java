@@ -10,4 +10,5 @@ import com.agendai.agendai_backend.model.MedicModel;
 public interface MedicRepositroy extends JpaRepository<MedicModel, UUID> {
 
     Optional<MedicModel> findByCpf(String cpf);
+
 }

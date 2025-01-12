@@ -1,5 +1,14 @@
 package com.agendai.agendai_backend.repository;
 
-public class PatientRepository {
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.agendai.agendai_backend.model.PatientModel;
+
+public interface PatientRepository extends JpaRepository<PatientModel, UUID> {
+
+    Optional<PatientModel> findByCpf(String cpf);
 
 }
