@@ -1,9 +1,10 @@
 package com.agendai.agendai_backend.controller;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,11 +38,18 @@ public class PatientController {
         return ResponseEntity.status(200).body(patientService.deletePatientById(id));
     }
 
-    @GetMapping("/list/{id}/{page}")
-    public ResponseEntity<Page<ConsultationModel>> findPatientConsultationList(
-            @PathVariable UUID id,
-            @PathVariable int page) throws Exception {
-        return ResponseEntity.status(200).body(patientService.getPatientConsultationsByPage(id, page));
+    @GetMapping("/get/{email}")
+    public ResponseEntity<PatientModel> findPatientByEmail(
+            @PathVariable String email) throws Exception {
+        Optional<PatientModel> foundPatient = patientService.getPatientByEmail(email);
+        return ResponseEntity.status(200).body(foundPatient.get());
+    }
+
+    // @GetMapping("/list/{email}/{page}")
+    @GetMapping("/list/{email}")
+    public ResponseEntity<List<ConsultationModel>> findPatientConsultationList(
+            @PathVariable String email) throws Exception {
+        return ResponseEntity.status(200).body(patientService.getPatientConsultationsByPage(email));
     }
 
 }

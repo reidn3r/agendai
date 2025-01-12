@@ -1,11 +1,10 @@
 package com.agendai.agendai_backend.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.agendai.agendai_backend.DTO.Patient.PatientDTO;
@@ -42,14 +41,16 @@ public class PatientService {
         return id;
     }
 
-    public Page<ConsultationModel> getPatientConsultationsByPage(UUID id, int page) throws Exception {
-        Optional<PatientModel> foundPatient = patientRepository.findById(id);
+    public List<ConsultationModel> getPatientConsultationsByPage(String email) throws Exception {
+        Optional<PatientModel> foundPatient = patientRepository.findByEmail(email);
         if (foundPatient.isEmpty())
             throw new Exception("Paciente nao encontrado");
 
-        // Cada página contém 10 consultas
-        PageRequest pageRequest = PageRequest.of(page, 10);
-        return consultationRepository.findById(id, pageRequest);
+        return consultationRepository.findAllByPatient_Id(foundPatient.get().getId());
+    }
+
+    public Optional<PatientModel> getPatientByEmail(String email) {
+        return patientRepository.findByEmail(email);
     }
 
     private boolean isValidPatient(PatientDTO data) throws Exception {
