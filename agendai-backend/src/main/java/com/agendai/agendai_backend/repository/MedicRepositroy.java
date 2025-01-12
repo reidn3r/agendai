@@ -11,4 +11,6 @@ public interface MedicRepositroy extends JpaRepository<MedicModel, UUID> {
 
     Optional<MedicModel> findByCpf(String cpf);
 
+    void deleteByCpf(String cpf);
+
 }

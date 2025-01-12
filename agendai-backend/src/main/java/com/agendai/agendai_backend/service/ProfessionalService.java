@@ -36,6 +36,26 @@ public class ProfessionalService {
         return this.createSecretary(data);
     }
 
+    public MedicModel deleteMedicByCPF(String cpf) throws Exception {
+        Optional<MedicModel> foundMedic = medicRepositroy.findByCpf(cpf);
+
+        if (!foundMedic.isPresent())
+            throw new Exception("Profissional nao encontrado");
+
+        medicRepositroy.deleteByCpf(cpf);
+        return foundMedic.get();
+    }
+
+    public SecretaryModel deleteSecretaryByCPF(String cpf) throws Exception {
+        Optional<SecretaryModel> foundSecretary = secretaryRepository.findByCpf(cpf);
+
+        if (!foundSecretary.isPresent())
+            throw new Exception("Profissional nao encontrado");
+
+        secretaryRepository.deleteByCpf(cpf);
+        return foundSecretary.get();
+    }
+
     public List<MedicModel> getMedicList() {
         return medicRepositroy.findAll();
     }

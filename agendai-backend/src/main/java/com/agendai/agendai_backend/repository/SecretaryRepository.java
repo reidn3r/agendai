@@ -11,4 +11,6 @@ public interface SecretaryRepository extends JpaRepository<SecretaryModel, UUID>
 
     Optional<SecretaryModel> findByCpf(String cpf);
 
+    void deleteByCpf(String cpf);
+
 }
