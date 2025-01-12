@@ -20,35 +20,40 @@ export default function Home(){
       
     return(
         <>
-            <nav className="bg-blue-600 text-white px-4 py-2 flex justify-between items-center shadow-md">
-      <h1 className="text-lg font-bold">Menu Rápido</h1>
-      <div className="space-x-4">
-        <button
-          onClick={() => handleAction("Create")}
-          className="btn btn-navbar"
-        >
-          Create
-        </button>
-        <button
-          onClick={() => handleAction("Read")}
-          className="btn btn-navbar"
-        >
-          Read
-        </button>
-        <button
-          onClick={() => handleAction("Update")}
-          className="btn btn-navbar"
-        >
-          Update
-        </button>
-        <button
-          onClick={() => handleAction("Delete")}
-          className="btn btn-navbar"
-        >
-          Delete
-        </button>
+            <nav className="navbar">
+                <h1>Agendai</h1>
+                <div className="space-x-4">
+                    <button
+                    onClick={() => handleAction("Create")}
+                    className="btn btn-navbar"
+                    >
+                    Create
+                    </button>
+                    <button
+                    onClick={() => handleAction("Read")}
+                    className="btn btn-navbar"
+                    >
+                    Read
+                    </button>
+                    <button
+                    onClick={() => handleAction("Update")}
+                    className="btn btn-navbar"
+                    >
+                    Update
+                    </button>
+                    <button
+                    onClick={() => handleAction("Delete")}
+                    className="btn btn-navbar"
+                    >
+                    Delete
+                    </button>
+                </div>
+            </nav>
+
+            <div className="bg-slate-950">
+                <h1 className="text-white text-5xl main-content">Bem-vindo ao sistema</h1>
+                <p>Este é o conteúdo principal abaixo da barra de navegação.</p>
       </div>
-    </nav>
         </>
     )
 }

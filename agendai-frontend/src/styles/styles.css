@@ -1,9 +1,27 @@
 /* styles.css */
+
+.navbar {
+  @apply bg-slate-900 text-white px-4 py-2 flex justify-between items-center shadow-md;
+}
+
+h1 {
+  @apply font-sans font-bold;
+}
+
 .btn {
-    @apply bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition;
-  }
-  
-  .btn-navbar {
-    @apply bg-green-500 hover:bg-green-600;
-  }
-  
+  @apply hover:bg-blue-600 text-white px-4 py-2 rounded transition;
+}
+
+.btn-navbar {
+  @apply bg-slate-700 hover:bg-slate-700;
+}
+
+.main-content {
+  height: calc(100vh - 60px); /* Preenche o restante da viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
