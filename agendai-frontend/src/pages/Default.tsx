@@ -9,14 +9,6 @@ export default function Home(){
     const handleLogin = () => {
         navigate("/login")    
     }
-
-    const handleHome = () => {
-        navigate("/home")    
-    }
-
-    const handleAction = (action) => {
-        alert(`You clicked ${action}`);
-      };
       
     return(
         <>
@@ -27,15 +19,15 @@ export default function Home(){
                         className="btn btn-navbar"
                         >◄
                     </button>
-                    <h1 className="navbar-title">Agendai</h1>
+                    <h1 className="navbar-title">AGI</h1>
                     </div>
 
                     <div className="navbar-right">
-                    <button onClick={() => handleAction("Create")} className="btn btn-navbar">
-                        Consultas 
+                    <button onClick={handleLogin} className="btn btn-navbar">
+                        Log in 
                     </button>
-                    <button onClick={() => handleAction("Read")} className="btn btn-navbar">
-                        Pacientes
+                    <button onClick={() => alert("Info")} className="btn btn-navbar">
+                        Info
                     </button>
                 </div>
             </nav>

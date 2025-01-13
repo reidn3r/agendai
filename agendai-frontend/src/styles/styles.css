@@ -72,3 +72,52 @@ h4 {
 .btn-menu:hover {
   background-color: #059669;
 }
+
+.login-container {
+  background-color: #1e293b; /* Cinza escuro */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: left;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #334155; /* Fundo de input */
+  color: white;
+  outline: none;
+}
+
+.input-field::placeholder {
+  color: #94a3b8; /* Placeholder claro */
+}
+
+.input-field:focus {
+  border: 1px solid #3b82f6; /* Azul ao focar */
+}
+
+.btn-primary {
+  background-color: #3b82f6; /* Azul */
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb; /* Azul escuro */
+}
