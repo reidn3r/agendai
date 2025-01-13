@@ -35,4 +35,9 @@ public class ConsultationController {
         UUID deletedId = consultationService.deleteConsultationById(id);
         return ResponseEntity.status(200).body(deletedId);
     }
+
+    @GetMapping("/teste")
+    public ResponseEntity<String> teste() {
+        return ResponseEntity.status(200).body("backend funcionando");
+    }
 }
