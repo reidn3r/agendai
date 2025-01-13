@@ -20,40 +20,32 @@ export default function Home(){
       
     return(
         <>
-            <nav className="navbar">
-                <h1>Agendai</h1>
-                <div className="space-x-4">
+           <nav className="navbar bg-slate-900">
+                <div className="navbar-left">
                     <button
-                    onClick={() => handleAction("Create")}
-                    className="btn btn-navbar"
-                    >
-                    Create
+                        onClick={() => navigate(-1)} // Navega para a página anterior
+                        className="btn btn-navbar"
+                        >◄
                     </button>
-                    <button
-                    onClick={() => handleAction("Read")}
-                    className="btn btn-navbar"
-                    >
-                    Read
+                    <h1 className="navbar-title">Agendai</h1>
+                    </div>
+
+                    <div className="navbar-right">
+                    <button onClick={() => handleAction("Create")} className="btn btn-navbar">
+                        Consultas 
                     </button>
-                    <button
-                    onClick={() => handleAction("Update")}
-                    className="btn btn-navbar"
-                    >
-                    Update
-                    </button>
-                    <button
-                    onClick={() => handleAction("Delete")}
-                    className="btn btn-navbar"
-                    >
-                    Delete
+                    <button onClick={() => handleAction("Read")} className="btn btn-navbar">
+                        Pacientes
                     </button>
                 </div>
             </nav>
 
-            <div className="bg-slate-950">
-                <h1 className="text-white text-5xl main-content">Bem-vindo ao sistema</h1>
-                <p>Este é o conteúdo principal abaixo da barra de navegação.</p>
-      </div>
+            <div className="bg-slate-950 main-content">
+                <div>
+                    <h1 className="text-9xl pb-2">AGI</h1>
+                    <h4 className="text-xl text-slate-300">Agendamentos Inteligentes</h4>
+                </div>
+            </div>
         </>
     )
 }
