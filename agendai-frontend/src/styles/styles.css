@@ -1,0 +1,136 @@
+/* styles.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Espaço entre os itens */
+  align-items: center; /* Alinha verticalmente */
+  padding: 10px;
+  color: white;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center; /* Alinha o botão e o título verticalmente */
+  gap: 10px; /* Espaço entre o botão e o título */
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 10px; /* Espaço entre os botões */
+}
+
+.btn-navbar {
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-navbar:hover {
+  background-color: #020617;
+}
+
+h1 {
+  @apply font-sans font-bold text-white;
+}
+
+h4 {
+  @apply text-white font-sans;
+}
+
+.main-content {
+  height: calc(100vh - 56px); /* Preenche o restante da viewport */
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+
+.menu-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu-list li {
+  margin-bottom: 10px;
+}
+
+.btn-menu {
+  width: 200px;
+  text-align: center;
+  padding: 12px 0;
+  background-color: #10b981;
+}
+
+.btn-menu:hover {
+  background-color: #059669;
+}
+
+.login-container {
+  background-color: #1e293b; /* Cinza escuro */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: left;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #334155; /* Fundo de input */
+  color: white;
+  outline: none;
+}
+
+.input-field::placeholder {
+  color: #94a3b8; /* Placeholder claro */
+}
+
+.input-field:focus {
+  border: 1px solid #3b82f6; /* Azul ao focar */
+}
+
+.btn-primary {
+  background-color: #3b82f6; /* Azul */
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb; /* Azul escuro */
+}
+
+.main-blocks {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 100%;
+}
+
+.block {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}

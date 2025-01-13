@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import "../styles/styles.css";
+import Navbar from "@/components/navbar";
 
 export default function Home(){
 
@@ -8,19 +10,17 @@ export default function Home(){
     const handleLogin = () => {
         navigate("/login")    
     }
-
-    const handleHome = () => {
-        navigate("/home")    
-    }
+      
     return(
         <>
-            <p className="bg-red-300">Página Padrão</p>
-            <Button
-                onClick={handleLogin}
-            >Ir para Login</Button>
-            <Button
-                onClick={handleHome}
-            >Ir para Home</Button>
+            <div className="bg-slate-950 main-content">
+                <div className="main-blocks w-full">
+                    <div className="block">
+                        <h1 className="text-9xl pb-2">AGI</h1>
+                        <h4 className="text-xl text-slate-300">Agendamentos Inteligentes</h4>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }
