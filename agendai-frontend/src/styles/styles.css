@@ -47,8 +47,9 @@ h4 {
 
 .main-content {
   height: calc(100vh - 56px); /* Preenche o restante da viewport */
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   text-align: center;
 }
@@ -120,4 +121,16 @@ h4 {
 
 .btn-primary:hover {
   background-color: #2563eb; /* Azul escuro */
+}
+
+.main-blocks {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 100%;
+}
+
+.block {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
 }

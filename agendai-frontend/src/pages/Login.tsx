@@ -1,66 +1,64 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-export default function Login(){
+export default function Login() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ email: "", password: "" });
 
-    const navigate = useNavigate();
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  }
 
-    return(
-        <>
-           <nav className="navbar bg-slate-900">
-                <div className="navbar-left">
-                    <button
-                        onClick={() => navigate(-1)} // Navega para a página anterior
-                        className="btn btn-navbar"
-                        >◄
-                    </button>
-                    <h1 className="navbar-title">AGI</h1>
-                    </div>
+  function onSubmit(event) {
+    event.preventDefault(); // Evita o comportamento padrão de recarregar a página
+    console.log(formData); // Mostra os dados no console (ou envia para a API)
+    // Aqui você pode adicionar lógica para autenticação
+  }
 
-                    <div className="navbar-right">
-                    <button onClick={() => navigate("/login")} className="btn btn-navbar">
-                        Log in 
-                    </button>
-                    <button onClick={() => alert("Info")} className="btn btn-navbar">
-                        Info
-                    </button>
-                </div>
-            </nav>
-
-            <div className="bg-slate-950 main-content">
-                <div className="login-container">
-                <h1 className="text-4xl pb-4 text-white">Login</h1>
-                <form className="login-form">
-                    <div className="form-group">
-                    <label htmlFor="email" className="text-white block mb-2">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Digite seu email"
-                        className="input-field"
-                        required
-                    />
-                    </div>
-                    <div className="form-group">
-                    <label htmlFor="password" className="text-white block mb-2">
-                        Senha
-                    </label>
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Digite sua senha"
-                        className="input-field"
-                        required
-                    />
-                    </div>
-                    <Button type="submit" className="btn btn-primary w-full mt-4">
-                    Entrar
-                    </Button>
-                </form>
-                </div>
+  return (
+    <>
+      <div className="bg-slate-950 main-content">
+        <div className="login-container">
+          <h1 className="text-4xl pb-4 text-white">Login</h1>
+          <form className="login-form" onSubmit={onSubmit}>
+            <div className="form-group">
+              <label htmlFor="email" className="text-white block mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Digite seu email"
+                className="input-field"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
             </div>
-        </>
-    )
+            <div className="form-group">
+              <label htmlFor="password" className="text-white block mb-2">
+                Senha
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Digite sua senha"
+                className="input-field"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <Button type="submit" className="btn btn-primary w-full mt-4">
+              Entrar
+            </Button>
+          </form>
+        </div>
+      </div>
+    </>
+  );
 }
