@@ -1,4 +1,4 @@
-import { Home, Users, Calendar, Settings, LogOut } from "lucide-react"
+import { Home, Users, Settings, LogOut, CrossIcon, BellIcon } from "lucide-react"
 import {
     Sidebar,
     SidebarContent,
@@ -42,9 +42,14 @@ export function AppSidebar({ user }: AppSidebarProps) {
                     icon: Users
                 },
                 {
+                    title: "Médicos",
+                    url: "/medicos",
+                    icon: CrossIcon
+                },
+                {
                     title: "Notificações",
                     url: "/notificacoes",
-                    icon: Calendar
+                    icon: BellIcon
                 }
             ]
             case "SECRETARIA":
