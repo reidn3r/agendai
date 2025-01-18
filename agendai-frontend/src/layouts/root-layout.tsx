@@ -1,11 +1,16 @@
 import { SidebarProvider } from "@/components/ui/sidebar"
-import Navbar, { UserType } from "@/components/navbar"
+import Navbar from "@/components/navbar"
 import { AppSidebar } from "@/components/sidebar/app-sidebar"
+
+export type UserType = {
+    nome:string,
+    type: "ADMIN" | "SECRETARIA" | "NONE"
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     const user:UserType = {
-        nome: "Zilda",
-        type: "ADM"
+        nome: "Nome da Secretária",
+        type: "ADMIN"
     }
 
     return (
@@ -13,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="flex min-h-screen w-full">
                 <AppSidebar user={user} />
                 <div className="flex-1 flex flex-col">
-                    <Navbar user={user} />
+                    <Navbar />
                     <main className="flex-1 flex overflow-auto bg-gray-100">
                         {children}
                     </main>

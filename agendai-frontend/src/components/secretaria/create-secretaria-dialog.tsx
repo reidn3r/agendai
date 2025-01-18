@@ -1,12 +1,26 @@
-import { User, FileText } from "lucide-react";
+import { User, FileText, MailCheck, LockIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../ui/dialog";
 import { useState } from "react";
 import { SecretariaModel } from '../../models/SecretariaModel';
+import axios from 'axios';
 
-export default function CreateSecretariaDialog(){
+export default function CreateSecretariaDialog({ secretarias, setSecretarias, isDialogOpen, setIsDialogOpen } :
+    { 
+        setSecretarias: (data:SecretariaModel[]) => void,
+        secretarias : SecretariaModel[],
+        setIsDialogOpen: (data:boolean) => void,
+        isDialogOpen : boolean
+    }){
 
-    const [secretariaData, setSecretariaData] = useState<SecretariaModel>({cpf: "", name: ""});
+    const [secretariaData, setSecretariaData] = useState<SecretariaModel>(
+        {
+            id: "",
+            cpf: "",
+            name: "",
+            email: "",
+            password: "",
+        });
     
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -16,9 +30,24 @@ export default function CreateSecretariaDialog(){
         }));
     };
     
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Dados da secretária:", secretariaData);
+        const payload = {
+            ...secretariaData,
+            type: "SECRETARIA"
+        }
+        const response = await axios.post("http://localhost:8080/professional/create", payload);
+        if(response.status === 201){
+            //Atualiza a lista em tela
+            setSecretarias([
+                ...secretarias,
+                payload
+            ])
+            setIsDialogOpen(false);
+        }
+        else{
+            alert("Erro ao criar nova secretária");
+        }
     };
     
     return (
@@ -34,7 +63,7 @@ export default function CreateSecretariaDialog(){
                 </label>
                 <input
                     type="text"
-                    className="rounded-sm px-2 py-1 border border-neutral-300"
+                    className="rounded-sm px-2 py-1 border border-neutral-300 text-black"
                     name="name"
                     id="name"
                     placeholder="Lorem Ipsum"
@@ -50,11 +79,41 @@ export default function CreateSecretariaDialog(){
                 </label>
                 <input
                     type="text"
-                    className="rounded-sm px-2 py-1 border border-neutral-300"
+                    className="rounded-sm px-2 py-1 border border-neutral-300 text-black"
                     name="cpf"
                     id="cpf"
                     placeholder="xxx.yyy.zzz-xy"
                     value={secretariaData.cpf}
+                    onChange={handleInputChange}
+                />
+                </div>
+                <div className="flex flex-col mt-4">
+                <label htmlFor="cpf" className="flex items-center gap-2">
+                    <MailCheck className="text-white" size={16} />
+                    Email
+                </label>
+                <input
+                    type="email"
+                    className="rounded-sm px-2 py-1 border border-neutral-300 text-black"
+                    name="email"
+                    id="email"
+                    placeholder="exemplo@email.com"
+                    value={secretariaData.email}
+                    onChange={handleInputChange}
+                />
+                </div>
+                <div className="flex flex-col mt-4">
+                <label htmlFor="password" className="flex items-center gap-2">
+                    <LockIcon className="text-white" size={16} />
+                    Senha
+                </label>
+                <input
+                    type="password"
+                    className="rounded-sm px-2 py-1 border border-neutral-300 text-black"
+                    name="password"
+                    id="password"
+                    placeholder="*****"
+                    value={secretariaData.password}
                     onChange={handleInputChange}
                 />
                 </div>

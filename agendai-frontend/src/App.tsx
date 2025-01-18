@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import RootLayout from "./layouts/root-layout";
 import Secretaria from "./pages/Secretaria";
 import Home from "./pages/Home";
+import Notificacoes from "./pages/Notificacoes";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/secretaria" element={<Secretaria />} />
+            <Route path="/notificacoes" element={<Notificacoes />} />
           </Routes>
         </div>
         </RootLayout>

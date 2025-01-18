@@ -4,13 +4,27 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import DeleteSecretariaDialog from "./delete-secretaria-dialog";
+import axios from 'axios';
+import { SecretariaModel } from "@/models/SecretariaModel";
 
-export default function SecretariaCard({ nome, cpf }: {
-    nome:string, cpf:string 
-}){
 
-    const onConfirm = () => {
-        console.log("ok");
+export default function SecretariaCard({ nome, cpf, secretarias, setSecretarias } : {
+    nome:string, 
+    cpf:string,
+    secretarias : SecretariaModel[],
+    setSecretarias: (data:SecretariaModel[]) => void
+    }){
+
+    const onConfirm = async() => {
+        try{
+            const response = await axios.delete(`http://localhost:8080/professional/delete/secretary/${cpf}`);
+            console.log(response);
+            const newArray = secretarias.filter((s) => s.cpf !== cpf);
+            setSecretarias(newArray);
+        }
+        catch(err:any){
+            alert("Erro ao deletar secretária")
+        }
     }
 
     return(

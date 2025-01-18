@@ -15,7 +15,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 type AppSidebarProps = {
     user: {
-        type: "NONE" | "SECRETARIA" | "ADM"
+        type: "ADMIN" | "SECRETARIA" | "NONE"
         nome: string
     }
 }
@@ -29,7 +29,7 @@ export function AppSidebar({ user }: AppSidebarProps) {
 
     const getMenuItems = () => {
         switch (user.type) {
-            case "ADM":
+            case "ADMIN":
             return [
                 {
                     title: "Dashboard",
@@ -89,7 +89,7 @@ export function AppSidebar({ user }: AppSidebarProps) {
             
             <SidebarContent className="bg-[#09090b] text-white">
             <SidebarGroup>
-            <SidebarGroupLabel className="text-white">Menu</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-white">Menu { user.type.toLowerCase() }</SidebarGroupLabel>
             <SidebarGroupContent>
                 <SidebarMenu>
                 {getMenuItems().map((item) => (
