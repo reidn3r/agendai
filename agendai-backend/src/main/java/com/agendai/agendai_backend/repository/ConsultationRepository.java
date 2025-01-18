@@ -15,4 +15,6 @@ public interface ConsultationRepository extends JpaRepository<ConsultationModel,
     boolean existsByPatient_IdAndDate(UUID patientId, LocalDateTime date);
 
     Optional<ConsultationModel> findByMedic_IdAndDate(UUID medicId, LocalDateTime date);
+
+    List<ConsultationModel> findBySecretaryId(UUID secretaryId);
 }

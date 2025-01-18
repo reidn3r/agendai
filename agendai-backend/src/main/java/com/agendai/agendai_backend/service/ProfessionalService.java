@@ -11,9 +11,11 @@ import com.agendai.agendai_backend.DTO.Professional.IProfessional;
 import com.agendai.agendai_backend.DTO.Professional.ProfessionalDTO;
 import com.agendai.agendai_backend.DTO.Professional.ProfessionalType;
 import com.agendai.agendai_backend.DTO.User.UserRole;
+import com.agendai.agendai_backend.model.ConsultationModel;
 import com.agendai.agendai_backend.model.MedicModel;
 import com.agendai.agendai_backend.model.SecretaryModel;
 import com.agendai.agendai_backend.model.UserModel;
+import com.agendai.agendai_backend.repository.ConsultationRepository;
 import com.agendai.agendai_backend.repository.MedicRepositroy;
 import com.agendai.agendai_backend.repository.SecretaryRepository;
 import com.agendai.agendai_backend.repository.UserRepository;
@@ -29,6 +31,9 @@ public class ProfessionalService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ConsultationRepository consultationRepository;
 
     @Autowired
     private PasswordService passwordService;
@@ -60,8 +65,19 @@ public class ProfessionalService {
     public SecretaryModel deleteSecretaryByCPF(String cpf) throws Exception {
         Optional<SecretaryModel> foundSecretary = secretaryRepository.findByCpf(cpf);
 
-        if (!foundSecretary.isPresent())
+        if (!foundSecretary.isPresent()) {
             throw new Exception("Profissional nao encontrado");
+        }
+
+        SecretaryModel secretary = foundSecretary.get();
+
+        // Primeiro, buscar todas as consultas relacionadas
+        List<ConsultationModel> relatedConsultations = consultationRepository.findBySecretaryId(secretary.getId());
+
+        if (!relatedConsultations.isEmpty()) {
+            // Opção 1: Deletar todas as consultas relacionadas
+            consultationRepository.deleteAll(relatedConsultations);
+        }
 
         userRepository.deleteByCpf(cpf);
         secretaryRepository.deleteByCpf(cpf);
