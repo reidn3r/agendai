@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ public class ProfessionalController {
     ProfessionalService professionalService;
 
     @PostMapping("/create")
+    @CrossOrigin
     public ResponseEntity<IProfessional> createProfessional(@RequestBody @Valid ProfessionalDTO data) throws Exception {
         return ResponseEntity.status(201).body(professionalService.createProfessional(data));
     }
@@ -38,6 +40,7 @@ public class ProfessionalController {
     }
 
     @GetMapping("/list/secretary")
+    @CrossOrigin
     public ResponseEntity<List<SecretaryModel>> secretaryList() {
         return ResponseEntity.status(200).body(professionalService.getSecretaryList());
     }
@@ -48,6 +51,7 @@ public class ProfessionalController {
     }
 
     @DeleteMapping("/delete/secretary/{cpf}")
+    @CrossOrigin
     public ResponseEntity<Object> deleteSecretaryByCPF(@PathVariable String cpf) throws Exception {
         return ResponseEntity.status(200).body(professionalService.deleteSecretaryByCPF(cpf));
     }

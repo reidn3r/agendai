@@ -8,11 +8,13 @@ import org.hibernate.validator.constraints.br.CPF;
 import com.agendai.agendai_backend.DTO.Professional.IProfessional;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -37,8 +39,12 @@ public class SecretaryModel implements IProfessional {
     @CPF
     private String cpf;
 
+    @OneToOne(mappedBy = "secretary", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore // Referencia ciclica ao buscar secretaria
+    private UserModel user;
+
     @OneToMany(mappedBy = "secretary")
-    @JsonIgnore // Referencia ciclica ao criar uma nova consulta
+    @JsonIgnore // Referencia ciclica ao criar consulta
     private List<ConsultationModel> consultations;
 
     public SecretaryModel(String name, String cpf) {
