@@ -71,7 +71,7 @@ export default function Secretaria(){
                             nome={secretaria.name}
                             secretarias={secretarias}
                             setSecretarias={setSecretarias}
-                            />
+                        />
                     ))}
                 </div>
             </div>

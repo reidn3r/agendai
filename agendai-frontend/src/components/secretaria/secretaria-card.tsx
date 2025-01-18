@@ -1,4 +1,3 @@
-import { Button } from "../ui/button"
 import {
     AlertDialog,
     AlertDialogTrigger,
@@ -6,6 +5,7 @@ import {
 import DeleteSecretariaDialog from "./delete-secretaria-dialog";
 import axios from 'axios';
 import { SecretariaModel } from "@/models/SecretariaModel";
+import { Trash, User } from "lucide-react";
 
 
 export default function SecretariaCard({ nome, cpf, secretarias, setSecretarias } : {
@@ -28,20 +28,30 @@ export default function SecretariaCard({ nome, cpf, secretarias, setSecretarias 
     }
 
     return(
-        <div className="flex flex-row p-4 my-2 rounded-sm shadow-md border border-neutral-950/50 bg-[#171717]">
-            <div className="flex flex-col mx-4">
-                <p className="font-bold text-white"> { nome }</p>
-                <p className="text-sm text-neutral-400"> { cpf }</p>                        
+        <div className="flex flex-row items-center p-4 my-2 rounded-md shadow-lg border border-neutral-950/50 bg-[#171717] hover:shadow-xl transition-shadow duration-300">
+            {/* Ícone do usuário */}
+            <div className="flex items-center justify-center w-12 h-12 bg-neutral-800 rounded-full">
+                <User className="text-white" size={24} />
             </div>
 
+            {/* Informações da secretária */}
+            <div className="flex flex-col mx-4 flex-grow">
+                <p className="font-bold text-white text-lg"> {nome || "Nome não informado"} </p>
+                <p className="text-sm text-neutral-400">CPF: {cpf || "CPF não informado"} </p>
+            </div>
+
+            {/* Botão de deletar */}
             <AlertDialog>
                 <AlertDialogTrigger>
-                    <Button className="bg-red-950 hover:bg-red-900">Deletar</Button>
+                    <button
+                        className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 bg-neutral-800 hover:bg-red-800 hover:text-white rounded-md transition-colors duration-300"
+                    >
+                        <Trash size={18} />
+                        Deletar
+                    </button>
                 </AlertDialogTrigger>
-                <DeleteSecretariaDialog
-                    onConfirm={onConfirm}
-                />
+                <DeleteSecretariaDialog onConfirm={onConfirm} />
             </AlertDialog>
         </div>
-    )
+    );
 }
