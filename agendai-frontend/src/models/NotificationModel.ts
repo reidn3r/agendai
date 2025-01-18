@@ -1,5 +1,8 @@
+import { PatientModel } from "./PatientModel";
 
-export type NotificationModel = {
-    to: string,
-    message: string
+export interface NotificationModel {
+    id: string;
+    message: string;
+    tipo?: string;
+    patients: PatientModel[];
 }

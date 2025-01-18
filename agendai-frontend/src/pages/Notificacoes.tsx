@@ -3,43 +3,44 @@ import HelloHeader from "@/components/hello-header";
 import NotificationCard from "@/components/notification/notification-card";
 import GradientBackground from "@/components/ui/gradient-background";
 import { NotificationModel } from "@/models/NotificationModel";
+import { useEffect, useState } from "react";
+import axios from 'axios';
 
 export default function Notificacoes(){
-    const notification:NotificationModel = {
-        message: "Teste de mensaagem",
-        to: "rdn.adn00@gmail.com"
-    }
 
-    const notificacoesLength:number = 5;
+    const [notifications, setNotifications] = useState<NotificationModel[]>([]);
 
-    return(
-        <GradientBackground
-            firstColor="bg-[#4845D250]"
-            secondColor="bg-[#4845D250]"
-            >
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            const response = await axios.get("http://localhost:8080/notifications/list");
+            setNotifications(response.data);
+        }
+        fetchNotifications();
+    })
+
+    return (
+        <GradientBackground firstColor="bg-[#4845D250]" secondColor="bg-[#4845D250]">
             <div>
                 <HelloHeader
                     username="Lorem"
                     message="Aqui está a lista de notificações enviadas"
                 />
-
                 <div className="flex flex-col items-center justify-center">
                     <p className="my-16">
-                        {notificacoesLength === 0 ? (
-                        <> Ainda <span className="text-red-700">não foram</span> enviadas notificacoes. </>
+                        {notifications.length === 0 ? (
+                            <>Ainda <span className="text-red-700">não foram</span> enviadas notificações.</>
                         ) : (
-                        <>Até o momento, foram enviadas <span className="text-[#006FEE] font-bold">{notificacoesLength}</span> notificacoes </>
+                            <>Até o momento, foram enviadas <span className="text-[#006FEE] font-bold">{notifications.length}</span> notificações.</>
                         )}
                     </p>
 
-                    {/* Renderizar lista de notificacoes iterativamente */}
-                    <div className="grid grid-cols-3 gap-2 px-8 py-4 rounded-md border border-neutral-800/50 shadow-md bg-black/50 backdrop-blur-lg">
-                        <NotificationCard 
-                            notification={notification}
-                        />
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {notifications.map((notification) => (
+                            <NotificationCard key={notification.id} notification={notification} />
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
-    </GradientBackground>
-    )
+        </GradientBackground>
+    );
 }

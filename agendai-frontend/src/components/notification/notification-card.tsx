@@ -1,54 +1,38 @@
 import { NotificationModel } from "@/models/NotificationModel";
-import { MessageSquare, User } from "lucide-react";
-import NotificationDialog from "./notification-dialog";
-import { Dialog, DialogTrigger } from "../ui/dialog";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 
-
-
-export default function NotificationCard({ notification } : {
-    notification: NotificationModel
-}){
-
-    return(
-        <div className="flex flex-row 
-            items-center justify-between p-4 my-2 
-            rounded-md shadow-lg border border-neutral-950/50 bg-[#171717]">
-
-            <div className="flex flex-row items-center gap-4">
-                <div className="flex flex-col">
-                    
-                    <div className="flex items-center gap-2">
-                        <User className="w-4 h-4 text-neutral-400" />
-                        <p className="font-bold text-md text-white">{ notification.to.slice(0, 7) } {notification.to.length > 7 ? "..." : ""} </p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <MessageSquare className="w-4 h-4 text-neutral-400" />
-                        <p className="font-thin text-neutral-400"> { notification.message.slice(0, 3) } {notification.message.length > 3 ? "..." : "" }</p>
-                    </div>
-                </div>
-            </div>
-
-            <Dialog>
-                <DialogTrigger>
-                    <div
-                        className="
-                            px-4 py-2 mx-4
-                            text-sm font-medium text-white 
-                            bg-[#4845D2] rounded-md shadow-md
-                            hover:bg-[#5b59e0] hover:shadow-lg transition-all duration-300
-                            cursor-pointer
-                        "
-                    >
-                        Ver mais
-                    </div>
-                </DialogTrigger>
-                <NotificationDialog
-                    to={notification.to}
-                    message={notification.message}
-            
-                />
-            </Dialog>
-            
+export default function NotificationCard({ notification }: { notification: NotificationModel }) {
+    return (
+    <div className="flex flex-col gap-4 p-4 my-2 rounded-md shadow-lg border border-neutral-950/50 bg-[#171717]">
+        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-col gap-2">
+            <p className="font-bold text-md text-white">{notification.message}</p>
+            {notification.tipo && (
+            <span className="text-xs text-neutral-400">{notification.tipo}</span>
+            )}
         </div>
-    )
+        </div>
+
+        <div className="mt-2">
+            <Accordion type="multiple" className="w-full">
+                <AccordionItem value="patients-list">
+                <AccordionTrigger>Enviado para</AccordionTrigger>
+                <AccordionContent>
+                    {notification.patients.length > 0 ? (
+                    <ul className="pl-4 list-disc text-neutral-300">
+                        {notification.patients.map((patient) => (
+                        <li key={patient.id} className="text-sm">
+                            {patient.name} ({patient.email})
+                        </li>
+                        ))}
+                    </ul>
+                    ) : (
+                    <p className="text-sm text-neutral-500">Nenhum paciente associado a esta notificação.</p>
+                    )}
+                </AccordionContent>
+                </AccordionItem>
+            </Accordion>
+        </div>
+    </div>
+    );
 }
