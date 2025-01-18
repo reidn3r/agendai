@@ -29,18 +29,15 @@ export default function SecretariaCard({ nome, cpf, secretarias, setSecretarias 
 
     return(
         <div className="flex flex-row items-center p-4 my-2 rounded-md shadow-lg border border-neutral-950/50 bg-[#171717] hover:shadow-xl transition-shadow duration-300">
-            {/* Ícone do usuário */}
             <div className="flex items-center justify-center w-12 h-12 bg-neutral-800 rounded-full">
                 <User className="text-white" size={24} />
             </div>
 
-            {/* Informações da secretária */}
             <div className="flex flex-col mx-4 flex-grow">
                 <p className="font-bold text-white text-lg"> {nome || "Nome não informado"} </p>
                 <p className="text-sm text-neutral-400">CPF: {cpf || "CPF não informado"} </p>
             </div>
 
-            {/* Botão de deletar */}
             <AlertDialog>
                 <AlertDialogTrigger>
                     <button
