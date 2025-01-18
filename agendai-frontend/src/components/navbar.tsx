@@ -1,70 +1,20 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { SidebarTrigger } from "./ui/sidebar";
 
-export type UserType = {
-
-    type: "NONE" | "SECRETARIA" | "ADM",
-    nome: "Zilda"
-}
-
-export default function Navbar({ user } : { user: UserType }){
-
-    const navigate = useNavigate();
-
-    const handleLogin = () => {
-        navigate("/login")    
-    }
-
-      
-    return(
-        <nav className="navbar bg-slate-900">
-                <div className="navbar-left">
-                    <button
-                        onClick={() => navigate(-1)} // Navega para a página anterior
-                        className="btn btn-navbar"
-                        >◄
-                    </button>
-
-                    <h1 className="navbar-title">AGI</h1>
-                </div>
-
-                <div className="navbar-right">
-                    { user.type === "NONE" && (
-                        <>
-                            <button onClick={handleLogin} className="btn btn-navbar">
-                                Log in 
-                            </button>
-                            <button onClick={() => alert("Info")} className="btn btn-navbar">
-                                Info
-                            </button>
-                        </>
-                    )}
-                    { user.type === "SECRETARIA" && (
-                        <>
-                            <button onClick={handleLogin} className="btn btn-navbar">
-                                Pacientes
-                            </button>
-                            <button onClick={() => alert("Consultas")} className="btn btn-navbar">
-                                Consultas
-                            </button>
-                            <button onClick={() => alert("Log out")} className="btn btn-navbar">
-                                Log out
-                            </button>
-                        </>
-                    )}
-                    { user.type === "ADM" && (
-                        <>
-                            <button onClick={handleLogin} className="btn btn-navbar">
-                                Coisas de ADM
-                            </button>
-                            <button onClick={() => alert("Info")} className="btn btn-navbar">
-                                Info
-                            </button>
-                            <button onClick={() => alert("Log out")} className="btn btn-navbar">
-                                Log out
-                            </button>
-                        </>
-                    )}
-                </div>
-            </nav>
+export default function Navbar() {
+    return (
+        <nav className="bg-[#09090b] h-16 px-4 flex items-center border-b border-slate-800">
+            <div className="w-10">
+                <SidebarTrigger className="hover:bg-slate-800 p-2 rounded-lg text-white" />
+            </div>
+            <div className="mx-auto">
+                <Link
+                    to={"/"}
+                >
+                    <img src="https://img.logoipsum.com/250.svg" alt="" />
+                </Link>
+                {/* <h1 className="text-xl font-bold text-white">Logo</h1> */}
+            </div>
+        </nav>
     )
 }

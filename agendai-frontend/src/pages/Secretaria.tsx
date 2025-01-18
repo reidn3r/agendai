@@ -1,57 +1,53 @@
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
-import "../styles/styles.css";
+import {
+    Dialog,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+
+import HelloHeader from "@/components/hello-header";
+import SecretariaCard from "@/components/secretaria/secretaria-card";
+import CreateSecretariaDialog from "@/components/secretaria/create-secretaria-dialog";
+import GradientBackground from "@/components/ui/gradient-background";
 
 export default function Secretaria(){
+    const secretariasLength:number = 0;
 
-    const navigate = useNavigate();
-
-    const handleLogin = () => {
-        navigate("/login")    
-    }
-      
     return(
-        <>
-           <nav className="navbar bg-slate-900">
-                <div className="navbar-left">
-                    <button
-                        onClick={() => navigate(-1)} // Navega para a página anterior
-                        className="btn btn-navbar"
-                        >◄
-                    </button>
-                    <h1 className="navbar-title">AGI</h1>
-                    </div>
+        <GradientBackground
+            firstColor="bg-[#4845D250]"
+            secondColor="bg-[#4845D250]"
+            >
+            <div>
+                <HelloHeader
+                    username="Lorem"
+                    message="Aqui está a lista de secretárias cadastrados"
+                />
 
-                    <div className="navbar-right">
-                    <button onClick={handleLogin} className="btn btn-navbar">
-                        Log in 
-                    </button>
-                    <button onClick={() => alert("Info")} className="btn btn-navbar">
-                        Info
-                    </button>
-                </div>
-            </nav>
+                <div className="flex flex-col items-center justify-center">
+                <p className="my-16">
+                    {secretariasLength === 0 ? (
+                    <>
+                        Ainda <span className="text-red-700">não há</span> secretárias registradas. Que tal registrar a primeira?
+                    </>
+                    ) : (
+                    <>No momento, temos <span className="text-[#006FEE] font-bold">{secretariasLength}</span> secretárias cadastradas</>
+                    )}
+                </p>
 
-            <div className="bg-slate-950 main-content">
-                <div className="main-blocks w-full">
-                    <div className="block">
-                        <h1 className="text-9xl pb-2">AGI</h1>
-                        <h4 className="text-xl text-slate-300">Agendamentos Inteligentes</h4>
-                    </div>
+                <Dialog>
+                    <DialogTrigger>
+                        <p className="px-4 py-2 my-4 font-medium text-sm bg-[#4845D2] rounded-md shadow-md">Adicionar nova secretária</p>
+                    </DialogTrigger>
+                    <CreateSecretariaDialog />
+                </Dialog>
+                
+                {/* Renderizar lista de secretárias cadastradas iterativamente */}
+                <SecretariaCard 
+                    cpf="000.111.222-33"
+                    nome="Nome"
+                />
 
-                    
-                    <div className="text-white flex items-center">
-                        <div className="flex flex-col">
-                            <button onClick={handleLogin} className="btn btn-navbar">
-                                Log in 
-                            </button>
-                            <button onClick={() => alert("Info")} className="btn btn-navbar">
-                                Info
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </>
+    </GradientBackground>
     )
 }

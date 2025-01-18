@@ -1,64 +1,89 @@
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import GradientBackground from "@/components/ui/gradient-background";
+import { Mail, LockIcon } from "lucide-react";
 import { useState } from "react";
 
 export default function Login() {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
 
-  function handleChange(event) {
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   }
 
-  function onSubmit(event) {
-    event.preventDefault(); // Evita o comportamento padrão de recarregar a página
-    console.log(formData); // Mostra os dados no console (ou envia para a API)
-    // Aqui você pode adicionar lógica para autenticação
+  function onSubmit(event: React.FormEvent) {
+    event.preventDefault(); 
+    console.log("Dados do formulário:", formData);
   }
 
   return (
-    <>
-      <div className="bg-slate-950 main-content">
-        <div className="login-container">
-          <h1 className="text-4xl pb-4 text-white">Login</h1>
-          <form className="login-form" onSubmit={onSubmit}>
-            <div className="form-group">
-              <label htmlFor="email" className="text-white block mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Digite seu email"
-                className="input-field"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
+    <GradientBackground
+      firstColor="bg-[#006FEE]"
+      secondColor="bg-[#AE7EDE]"
+    >
+      <div className="flex justify-center items-center h-screen w-full relative">
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-md"></div>
+
+        <form 
+          onSubmit={onSubmit}
+          className="relative px-12 py-8 rounded-lg shadow-lg border border-white/10 bg-[#002E6250]"
+        >
+          <div className="p-4 flex flex-col items-center">
+            <p className="font-bold text-white text-lg">Login</p>
+            <p className="font-bold text-neutral-300">Inicie sua sessão aqui!</p>
+          </div>
+    
+          <div className="flex flex-col space-y-4">
+            {/* Campo de E-mail */}
+            <div>
+              <label htmlFor="email" className="text-sm font-semibold text-neutral-300">Email</label>
+              <div className="relative mt-1">
+                <Mail className="absolute left-3 top-2.5 h-5 w-5 text-neutral-400" />
+                <input
+                  className="w-full pl-10 p-2 border border-neutral-500 rounded-md bg-white/10 text-white placeholder:text-neutral-400"
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="example@email.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
-            <div className="form-group">
-              <label htmlFor="password" className="text-white block mb-2">
-                Senha
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Digite sua senha"
-                className="input-field"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
+
+            {/* Campo de Senha */}
+            <div>
+              <label htmlFor="password" className="text-sm font-semibold text-neutral-300">Senha</label>
+              <div className="relative mt-1">
+                <LockIcon className="absolute left-3 top-2.5 h-5 w-5 text-neutral-400" />
+                <input
+                  className="w-full pl-10 p-2 border border-neutral-500 rounded-md bg-white/10 text-white placeholder:text-neutral-400"
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="*****"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
-            <Button type="submit" className="btn btn-primary w-full mt-4">
+
+            <Button
+              type="submit"
+              className="bg-[#4845D2] text-white hover:bg-[#4845D250] py-2 rounded-md"
+            >
               Entrar
             </Button>
-          </form>
-        </div>
+
+            <div className="mt-4 text-neutral-400">
+              <p>O único agendamento inteligente de horários!</p>
+            </div>
+          </div>
+        </form>
       </div>
-    </>
+    </GradientBackground>
   );
 }

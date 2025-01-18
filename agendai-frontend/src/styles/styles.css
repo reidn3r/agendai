@@ -2,16 +2,20 @@
 
 .navbar {
   display: flex;
-  justify-content: space-between; /* Espaço entre os itens */
-  align-items: center; /* Alinha verticalmente */
+  justify-content: space-between;
+  /* Espaço entre os itens */
+  align-items: center;
+  /* Alinha verticalmente */
   padding: 10px;
   color: white;
 }
 
 .navbar-left {
   display: flex;
-  align-items: center; /* Alinha o botão e o título verticalmente */
-  gap: 10px; /* Espaço entre o botão e o título */
+  align-items: center;
+  /* Alinha o botão e o título verticalmente */
+  gap: 10px;
+  /* Espaço entre o botão e o título */
 }
 
 .navbar-title {
@@ -21,7 +25,8 @@
 
 .navbar-right {
   display: flex;
-  gap: 10px; /* Espaço entre os botões */
+  gap: 10px;
+  /* Espaço entre os botões */
 }
 
 .btn-navbar {
@@ -46,7 +51,8 @@ h4 {
 }
 
 .main-content {
-  height: calc(100vh - 56px); /* Preenche o restante da viewport */
+  height: calc(100vh - 56px);
+  /* Preenche o restante da viewport */
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -75,7 +81,8 @@ h4 {
 }
 
 .login-container {
-  background-color: #1e293b; /* Cinza escuro */
+  background-color: #1e293b;
+  /* Cinza escuro */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -97,21 +104,25 @@ h4 {
   padding: 10px;
   border-radius: 5px;
   border: none;
-  background-color: #334155; /* Fundo de input */
+  background-color: #334155;
+  /* Fundo de input */
   color: white;
   outline: none;
 }
 
 .input-field::placeholder {
-  color: #94a3b8; /* Placeholder claro */
+  color: #94a3b8;
+  /* Placeholder claro */
 }
 
 .input-field:focus {
-  border: 1px solid #3b82f6; /* Azul ao focar */
+  border: 1px solid #3b82f6;
+  /* Azul ao focar */
 }
 
 .btn-primary {
-  background-color: #3b82f6; /* Azul */
+  background-color: #3b82f6;
+  /* Azul */
   color: white;
   padding: 10px;
   border-radius: 5px;
@@ -120,7 +131,8 @@ h4 {
 }
 
 .btn-primary:hover {
-  background-color: #2563eb; /* Azul escuro */
+  background-color: #2563eb;
+  /* Azul escuro */
 }
 
 .main-blocks {
