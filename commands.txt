@@ -1,0 +1,6 @@
+Dentro de agendai-frontend
+- npm install (instalar atualizações no front, quando houver mudanças)
+- npm run dev (roda o front, sempre)
+
+Dentro de agendai-backend
+- mvn spring-boot:run (roda o back, sempre)
