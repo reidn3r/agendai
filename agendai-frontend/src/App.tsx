@@ -4,6 +4,7 @@ import RootLayout from "./layouts/root-layout";
 import Secretaria from "./pages/Secretaria";
 import Home from "./pages/Home";
 import Notificacoes from "./pages/Notificacoes";
+import Pacientes from "./pages/Pacientes";
 
 export default function App() {
   return (
@@ -15,6 +16,8 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/secretaria" element={<Secretaria />} />
             <Route path="/notificacoes" element={<Notificacoes />} />
+
+            <Route path="/pacientes" element={<Pacientes />} />
           </Routes>
         </div>
         </RootLayout>
