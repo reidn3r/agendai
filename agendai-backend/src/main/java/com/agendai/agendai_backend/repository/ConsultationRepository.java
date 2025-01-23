@@ -6,9 +6,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.agendai.agendai_backend.model.ConsultationModel;
 
+@Repository
 public interface ConsultationRepository extends JpaRepository<ConsultationModel, UUID> {
     List<ConsultationModel> findAllByPatient_Id(UUID id);
 

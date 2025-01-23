@@ -2,6 +2,8 @@ package com.agendai.agendai_backend.model;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,5 +34,6 @@ public class CandidatesModel {
 
     @OneToOne
     @Nullable
+    @JsonBackReference
     private ConsultationModel consultation;
 }

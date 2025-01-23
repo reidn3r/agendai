@@ -3,6 +3,8 @@ package com.agendai.agendai_backend.model;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,16 +34,20 @@ public class ConsultationModel {
     private LocalDateTime date;
 
     @ManyToOne
+    @JsonBackReference
     SecretaryModel secretary;
 
     @ManyToOne
+    @JsonBackReference
     MedicModel medic;
 
     @ManyToOne
+    @JsonBackReference
     PatientModel patient;
 
     @OneToOne
     @Nullable
+    @JsonBackReference
     private CandidatesModel candidate;
 
 }

@@ -7,6 +7,8 @@ import java.util.UUID;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -58,13 +60,18 @@ public class PatientModel {
     private String telefone;
     // Substituí o campo contato por telefone
 
+    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "patient")
     List<CandidatesModel> candidates;
 
+    @JsonManagedReference
+    // @JsonIgnore
     @OneToMany(mappedBy = "patient")
     List<ConsultationModel> consultations;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "patient_notification", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "notification_id"))
     List<NotificationModel> notifications;
 }
