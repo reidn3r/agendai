@@ -22,7 +22,7 @@ export default function Pacientes() {
     useEffect(() => {
         const fetchPatients = async () => {
             try {
-                const response = await axios.get("http://localhost:5173/patient/list");
+                const response = await axios.get("http://localhost:8080/patient/list");
                 console.log(response.data);
                 setPatients(response.data);
                 setFilteredPatients(response.data);
