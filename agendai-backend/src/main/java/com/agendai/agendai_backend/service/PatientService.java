@@ -49,8 +49,16 @@ public class PatientService {
         return consultationRepository.findAllByPatient_Id(foundPatient.get().getId());
     }
 
+    public List<PatientModel> getPatientList() {
+        return patientRepository.findAll();
+    }
+
     public Optional<PatientModel> getPatientByEmail(String email) {
         return patientRepository.findByEmail(email);
+    }
+
+        public Optional<PatientModel> getPatientByName(String name) {
+        return patientRepository.findByName(name);
     }
 
     private boolean isValidPatient(PatientDTO data) throws Exception {

@@ -8,24 +8,25 @@ import { PatientModel } from "@/models/PatientModel";
 import { Trash, User } from "lucide-react";
 
 
-export default function PatientCard({ nome, cpf, Patients, setPatients } : {
-    nome:string, 
-    cpf:string,
-    Patients : PatientModel[],
-    setPatients: (data:PatientModel[]) => void
+export default function PatientCard({ id, name} : { // Patients, setPatients
+    id:string,
+    name:string, 
+    email:string
+    // Patients : PatientModel[],
+    // setPatients: (data:PatientModel[]) => void
     }){
 
-    const onConfirm = async() => {
-        try{
-            const response = await axios.delete(`http://localhost:8080/professional/delete/secretary/${cpf}`);
-            console.log(response);
-            const newArray = Patients.filter((s) => s.cpf !== cpf);
-            setPatients(newArray);
-        }
-        catch(err:any){
-            alert("Erro ao deletar secretária")
-        }
-    }
+    // const onConfirm = async() => {
+    //     try{
+    //         const response = await axios.delete(`http://localhost:5173/professional/delete/patient/${id}`);
+    //         console.log(response);
+    //         const newArray = Patients.filter((s) => s.id !== id);
+    //         setPatients(newArray);
+    //     }
+    //     catch(err:any){
+    //         alert("Erro ao deletar secretária")
+    //     }
+    // }
 
     return(
         <div className="flex flex-row items-center p-4 my-2 rounded-md shadow-lg border border-neutral-950/50 bg-[#171717] hover:shadow-xl transition-shadow duration-300">
@@ -34,8 +35,8 @@ export default function PatientCard({ nome, cpf, Patients, setPatients } : {
             </div>
 
             <div className="flex flex-col mx-4 flex-grow">
-                <p className="font-bold text-white text-lg"> {nome || "Nome não informado"} </p>
-                <p className="text-sm text-neutral-400">CPF: {cpf || "CPF não informado"} </p>
+                <p className="font-bold text-white text-lg"> {name || "Nome não informado"} </p>
+                <p className="text-sm text-neutral-400">ID: {id || "CPF não informado"} </p>
             </div>
 
             <AlertDialog>
@@ -47,7 +48,6 @@ export default function PatientCard({ nome, cpf, Patients, setPatients } : {
                         Deletar
                     </button>
                 </AlertDialogTrigger>
-                <DeletePatientDialog onConfirm={onConfirm} />
             </AlertDialog>
         </div>
     );
