@@ -52,9 +52,10 @@
         }
         .footer {
             margin-top: 20px;
-            font-size: 12px;
+            font-size: 14px;
             color: #888;
         }
+
     </style>
 </head>
 <body>
@@ -64,7 +65,7 @@
     <p>Sua consulta foi agendada para <strong>{{DATA}}</strong>.</p>
     <p>Clique no botão abaixo para confirmar sua presença:</p>
     <a href="{{ENDPOINT}}" class="button">Confirmar Consulta</a>
-    <p class="footer">Se você não solicitou este agendamento, ignore este e-mail.</p>
+    <p class="footer">Se a consulta não for confirmada até <strong>{{LIMITE}}</strong>, ela poderá ser realocada para outro paciente.</p>
 </div>
 </body>
 </html>

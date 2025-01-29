@@ -42,6 +42,7 @@ public class EmailService {
             String emailDestinatario;
             UUID idConsulta = consultationResponseDTO.id();
             LocalDateTime dataConsulta = consultationResponseDTO.data();
+            LocalDateTime dataLimiteConfirmacao = dataConsulta.minusDays(1);
             String nomePaciente = consultationResponseDTO.patientName();
 
             Optional<PatientModel> destinatario = patientRepository.findById(consultationResponseDTO.patientId());
@@ -60,6 +61,7 @@ public class EmailService {
 
             htmlContent = htmlContent.replace("{{ID}}", idConsulta.toString());
             htmlContent = htmlContent.replace("{{DATA}}", dataConsulta.toString());
+            htmlContent = htmlContent.replace("{{LIMITE}}", dataLimiteConfirmacao.toString());
             htmlContent = htmlContent.replace("{{NOME}}", nomePaciente);
             htmlContent = htmlContent.replace("{{ENDPOINT}}",
                     "http://localhost:8080/consultation/confirmar/" + idConsulta);
