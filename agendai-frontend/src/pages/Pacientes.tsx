@@ -8,6 +8,7 @@ import PatientCard from "@/components/patient/patient-card";
 import CreatePatientDialog from "@/components/patient/create-patient-dialog";
 import GradientBackground from "@/components/ui/gradient-background";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PatientModel } from "@/models/PatientModel";
 import { user } from "@/layouts/root-layout";
 import axios from 'axios';
@@ -15,6 +16,7 @@ import axios from 'axios';
 
 export default function Pacientes() {
 
+    const navigate = useNavigate();
     const [patients, setPatients] = useState<PatientModel[]>([]);
     const [filteredPatients, setFilteredPatients] = useState<PatientModel[]>([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -55,14 +57,22 @@ export default function Pacientes() {
                 />
 
                 <div className="flex flex-col items-center justify-center">
-                    <input
-                        type="text"
-                        id="searchBar"
-                        placeholder="Pesquisar por nome ou CPF"
-                        value={searchTerm}
-                        onChange={handleSearch}
-                        className="my-4 px-4 py-2 border rounded-lg shadow-sm w-3/4 text-black focus:outline-none focus:ring-2 focus:ring-[#4845D2]"
-                    />
+                    <div className="flex flex-col md:flex-row w-3/4 items-center justify-between mb-4">
+                            <input
+                                type="text"
+                                id="searchBar"
+                                placeholder="Pesquisar por nome ou CPF"
+                                value={searchTerm}
+                                onChange={handleSearch}
+                                className="px-4 py-2 border rounded-lg shadow-sm w-full md:w-2/3 text-black focus:outline-none focus:ring-2 focus:ring-[#4845D2]"
+                            />
+                            <button
+                                onClick={() => navigate("/create-paciente")}
+                                className="mt-2 md:mt-0 md:ml-4 bg-[#4845D2] text-white px-6 py-2 rounded-lg shadow-md hover:bg-[#3732A5] transition"
+                            >
+                                Criar Paciente
+                            </button>
+                        </div>
 
                     <p className="my-8">
                         {filteredPatients.length === 0 ? (
