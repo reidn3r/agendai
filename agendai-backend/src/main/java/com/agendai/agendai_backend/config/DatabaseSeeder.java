@@ -58,7 +58,13 @@ public class DatabaseSeeder implements CommandLineRunner {
         // Criando Médicos
         MedicModel medic1 = new MedicModel("Dr. João Silva", "05079900059");
         MedicModel medic2 = new MedicModel("Dra. Maria Santos", "39184783001");
-        medicRepository.saveAll(Arrays.asList(medic1, medic2));
+        MedicModel medic3 = new MedicModel("Dr. Mario Bros", "73745739019");
+        MedicModel medic4 = new MedicModel("Dr. Adnan", "94003962010");
+        MedicModel medic5 = new MedicModel("Dr. Paes", "27719944020");
+        MedicModel medic6 = new MedicModel("Dr. Padovani", "43946267068");
+        MedicModel medic7 = new MedicModel("Dr. Leo", "31087610052");
+        MedicModel medic8 = new MedicModel("Dr. JV", "07802566037");
+        medicRepository.saveAll(Arrays.asList(medic1, medic2, medic3, medic4, medic5, medic6, medic7, medic8));
 
         // Criando Secretárias
         SecretaryModel secretary1 = new SecretaryModel("Ana Oliveira", "34905188024");
@@ -95,7 +101,64 @@ public class DatabaseSeeder implements CommandLineRunner {
         patient2.setDataNascimento(LocalDate.of(1985, 8, 22));
         patient2.setTelefone("11977665544");
 
-        patientRepository.saveAll(Arrays.asList(patient1, patient2));
+        PatientModel patient3 = new PatientModel();
+        patient3.setNome("Tony Stark");
+        patient3.setEmail("tony.stark@starkindustries.com");
+        patient3.setCpf("64715679019");
+        patient3.setDataNascimento(LocalDate.of(1970, 5, 29));
+        patient3.setTelefone("11999887766");
+
+        PatientModel patient4 = new PatientModel();
+        patient4.setNome("Leia Organa");
+        patient4.setEmail("leia.organa@rebellion.com");
+        patient4.setCpf("86521348043");
+        patient4.setDataNascimento(LocalDate.of(1956, 10, 21));
+        patient4.setTelefone("11887766555");
+
+        PatientModel patient5 = new PatientModel();
+        patient5.setNome("Bruce Wayne");
+        patient5.setEmail("bruce.wayne@wayneenterprises.com");
+        patient5.setCpf("80282593080");
+        patient5.setDataNascimento(LocalDate.of(1939, 4, 7));
+        patient5.setTelefone("11911223344");
+
+        PatientModel patient6 = new PatientModel();
+        patient6.setNome("Lara Croft");
+        patient6.setEmail("lara.croft@adventure.com");
+        patient6.setCpf("52262745056");
+        patient6.setDataNascimento(LocalDate.of(1992, 2, 14));
+        patient6.setTelefone("11955667788");
+
+        PatientModel patient7 = new PatientModel();
+        patient7.setNome("Walter White");
+        patient7.setEmail("walter.white@breakingbad.com");
+        patient7.setCpf("97816286007");
+        patient7.setDataNascimento(LocalDate.of(1958, 9, 7));
+        patient7.setTelefone("11881234567");
+
+        PatientModel patient8 = new PatientModel();
+        patient8.setNome("Sherlock Holmes");
+        patient8.setEmail("sherlock.holmes@bakerstreet.com");
+        patient8.setCpf("60267842090");
+        patient8.setDataNascimento(LocalDate.of(1854, 1, 6));
+        patient8.setTelefone("11778899665");
+
+        PatientModel patient9 = new PatientModel();
+        patient9.setNome("Ellen Ripley");
+        patient9.setEmail("ellen.ripley@weyland.com");
+        patient9.setCpf("74873116007");
+        patient9.setDataNascimento(LocalDate.of(1979, 10, 26));
+        patient9.setTelefone("11665544332");
+
+        PatientModel patient10 = new PatientModel();
+        patient10.setNome("Geralt de Rivia");
+        patient10.setEmail("geralt@kaermorhen.com");
+        patient10.setCpf("44003836014");
+        patient10.setDataNascimento(LocalDate.of(1250, 3, 1));
+        patient10.setTelefone("11553322110");
+
+
+        patientRepository.saveAll(Arrays.asList(patient1, patient2, patient3, patient4, patient5, patient6, patient7, patient8, patient9, patient10));
 
         // Criando Notificações
         NotificationModel notification1 = new NotificationModel();
