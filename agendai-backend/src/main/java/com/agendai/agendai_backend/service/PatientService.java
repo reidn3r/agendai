@@ -66,7 +66,7 @@ public class PatientService {
         if (foundByCpf.isPresent())
             throw new Exception("CPF já cadastrado");
 
-        Optional<PatientModel> foundByEmail = patientRepository.findByCpf(data.email());
+        Optional<PatientModel> foundByEmail = patientRepository.findByEmail(data.email());
         if (foundByEmail.isPresent())
             throw new Exception("Email já cadastrado");
 

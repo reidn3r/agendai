@@ -59,10 +59,4 @@ public class PatientController {
         return ResponseEntity.status(200).body(patientService.getPatientList());
     }
 
-    @GetMapping("/list")
-    @CrossOrigin
-    public ResponseEntity<List<PatientModel>> patientList() {
-        return ResponseEntity.status(200).body(patientService.getPatientList());
-    }
-
 }
