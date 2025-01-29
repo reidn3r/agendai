@@ -1,12 +1,13 @@
 import { AuroraBackground } from "@/components/ui/aurora-background"
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 import { motion } from 'framer-motion';
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
 
     const navigate = useNavigate();
-
     return (
     <div className="min-h-screen w-full">
         <AuroraBackground className="min-h-screen">

@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button";
 import GradientBackground from "@/components/ui/gradient-background";
 import { Mail, LockIcon } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -16,7 +18,8 @@ export default function Login() {
 
   function onSubmit(event: React.FormEvent) {
     event.preventDefault(); 
-    console.log("Dados do formulário:", formData);
+    // console.log("Dados do formulário:", formData);
+    navigate("/consultas")
   }
 
   return (

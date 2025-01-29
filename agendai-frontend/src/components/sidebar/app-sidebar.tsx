@@ -32,11 +32,6 @@ export function AppSidebar({ user }: AppSidebarProps) {
             case "ADMIN":
             return [
                 {
-                    title: "Dashboard",
-                    url: "/dashboard",
-                    icon: Home
-                },
-                {
                     title: "Secretárias",
                     url: "/secretaria",
                     icon: Users
@@ -54,11 +49,6 @@ export function AppSidebar({ user }: AppSidebarProps) {
             ]
             case "SECRETARIA":
             return [
-                {
-                title: "Dashboard",
-                url: "/dashboard",
-                icon: Home
-                },
                 {
                 title: "Pacientes",
                 url: "/pacientes",
@@ -119,7 +109,7 @@ export function AppSidebar({ user }: AppSidebarProps) {
                 <SidebarMenuButton 
                     className="hover:bg-[#18181b] hover:text-white"
                     asChild>
-                    <button onClick={() => alert("Log out")}>
+                    <button onClick={() => navigate("/")}>
                     <LogOut className="h-4 w-4" />
                     <span>Sair</span>
                     </button>

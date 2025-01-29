@@ -9,8 +9,8 @@ export type UserType = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     const user:UserType = {
-        nome: "Nome da Secretária",
-        type: "ADMIN"
+        nome: "Renato Balancieri",
+        type: "SECRETARIA"
     }
 
     return (
