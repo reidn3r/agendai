@@ -22,6 +22,7 @@ export default function Secretaria(){
         const fetchSecretarias = async () => {
             try {
                 const response = await axios.get("http://localhost:8080/professional/list/secretary");
+                console.log(response.data);
                 setSecretarias(response.data);
             } catch (error) {
                 alert("Erro ao buscar secretárias:");

@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,11 +46,17 @@ public class PatientController {
         return ResponseEntity.status(200).body(foundPatient.get());
     }
 
-    // @GetMapping("/list/{email}/{page}")
-    @GetMapping("/list/{email}")
-    public ResponseEntity<List<ConsultationModel>> findPatientConsultationList(
-            @PathVariable String email) throws Exception {
-        return ResponseEntity.status(200).body(patientService.getPatientConsultationsByPage(email));
+    @GetMapping("/get/{name}")
+    public ResponseEntity<PatientModel> findPatientByName(
+            @PathVariable String name) throws Exception {
+        Optional<PatientModel> foundPatient = patientService.getPatientByName(name);
+        return ResponseEntity.status(200).body(foundPatient.get());
+    }
+
+    @GetMapping("/list")
+    @CrossOrigin
+    public ResponseEntity<List<PatientModel>> patientList() {
+        return ResponseEntity.status(200).body(patientService.getPatientList());
     }
 
 }
