@@ -2,6 +2,7 @@ package com.agendai.agendai_backend.controller;
 
 import java.util.UUID;
 
+import com.agendai.agendai_backend.model.ConsultationModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,6 +26,11 @@ public class ConsultationController {
     @Autowired
     private ConsultationService consultationService;
 
+    @GetMapping("/confirmar/{id}")
+    public ResponseEntity<ConsultationModel> confirmacaoDaConsulta(@PathVariable UUID id) throws Exception{
+        return ResponseEntity.status(200).body(consultationService.confirmacaoConsulta(id));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<ConsultationResponseDTO> createConsultation(@RequestBody @Valid ConsultationDTO data)
             throws Exception {
@@ -39,6 +45,6 @@ public class ConsultationController {
 
     @GetMapping("/teste")
     public ResponseEntity<String> teste() {
-        return ResponseEntity.status(200).body("backend funcionando");
+        return ResponseEntity.status(200).body("CONSULTA MARCADA");
     }
 }

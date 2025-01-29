@@ -4,10 +4,13 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.agendai.agendai_backend.model.ConsultationModel;
+import lombok.Builder;
 
+@Builder
 public record ConsultationResponseDTO(
         UUID id,
         LocalDateTime data,
+        String estado,
         UUID secretaryId,
         String secretaryName,
         UUID medicId,
@@ -18,6 +21,7 @@ public record ConsultationResponseDTO(
         return new ConsultationResponseDTO(
                 model.getId(),
                 model.getDate(),
+                model.getEstado(),
                 model.getSecretary().getId(),
                 model.getSecretary().getName(),
                 model.getMedic().getId(),

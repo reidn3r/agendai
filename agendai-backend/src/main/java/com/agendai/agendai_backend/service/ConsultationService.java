@@ -41,6 +41,9 @@ public class ConsultationService {
     @Autowired
     private CandidatesRepository candidatesRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     // Map que mantém ranking/Posicao na fila de agendamento
     private Map<UUID, Map<UUID, Integer>> consultationRankings = new HashMap<>();
 
@@ -69,17 +72,40 @@ public class ConsultationService {
         SecretaryModel foundSecretary = validatedPayload.getSecretary();
 
         ConsultationModel newConsultationModel = new ConsultationModel(null,
-                data.date(), foundSecretary, foundMedic, foundPatient, null);
+                data.date(), "PENDENTE", foundSecretary, foundMedic, foundPatient, null);
 
         ConsultationModel savedConsultation = consultationRepository.save(newConsultationModel);
+        ConsultationResponseDTO consultationResponseDTO = ConsultationResponseDTO.builder()
+                .id(savedConsultation.getId())
+                .data(savedConsultation.getDate())
+                .estado(savedConsultation.getEstado())
+                .secretaryId(savedConsultation.getSecretary().getId())
+                .secretaryName(savedConsultation.getSecretary().getName())
+                .medicId(savedConsultation.getMedic().getId())
+                .medicName(savedConsultation.getMedic().getName())
+                .patientId(savedConsultation.getPatient().getId())
+                .patientName(savedConsultation.getPatient().getNome())
+                .build();
 
-        /*
-         * TODO: ENVIAR NOTIFICAÇÃO POR EMAIL AO USUÁRIO!!!
-         * - Se possível, de forma assíncrona
-         */
-
+        try{
+            emailService.emailConfirmacao(consultationResponseDTO);
+            System.out.println("Enviado email com sucesso");
+        }catch(Exception e) {
+            System.err.println("Erro ao enviar o email:" + e.getMessage());
+        }
         return ConsultationResponseDTO.fromModel(savedConsultation);
     }
+
+    public ConsultationModel confirmacaoConsulta(UUID id){
+        Optional<ConsultationModel> consultaOptional = consultationRepository.findById(id);
+        if(consultaOptional.isPresent()){
+            ConsultationModel consulta = consultaOptional.get();
+            consulta.setEstado("CONFIRMADA");
+            return consultationRepository.save(consulta);
+        }
+        throw new RuntimeException("Consulta não encontrada, com o ID:" + id);
+    }
+
 
     public UUID deleteConsultationById(UUID id) throws Exception {
         Optional<ConsultationModel> foundConsultation = consultationRepository.findById(id);

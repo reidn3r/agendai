@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Consulta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f3ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .email-container {
+            max-width: 500px;
+            padding: 25px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-top: 5px solid #6a0dad;
+        }
+        h1 {
+            color: #6a0dad;
+            font-size: 22px;
+        }
+        p {
+            color: #555;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .button {
+            display: inline-block;
+            padding: 14px 30px;
+            margin-top: 20px;
+            color: #fff;
+            background: linear-gradient(45deg, #6a0dad, #ffcc00);
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button:hover {
+            background: linear-gradient(45deg, #5c0ca5, #e6b800);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <h1>Confirmação de Consulta</h1>
+    <p>Olá <strong>{{NOME}}</strong>,</p>
+    <p>Sua consulta foi agendada para <strong>{{DATA}}</strong>.</p>
+    <p>Clique no botão abaixo para confirmar sua presença:</p>
+    <a href="{{ENDPOINT}}" class="button">Confirmar Consulta</a>
+    <p class="footer">Se você não solicitou este agendamento, ignore este e-mail.</p>
+</div>
+</body>
+</html>
