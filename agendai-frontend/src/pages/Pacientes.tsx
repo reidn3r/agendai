@@ -74,15 +74,19 @@ export default function Pacientes() {
                     </p>
 
                     {/* Renderizar lista de pacientes filtrados */}
-                    {Array.isArray(filteredPatients) && filteredPatients.map((patient) => (
-                        <PatientCard
-                            name={patient.nome}
-                            cpf={patient.cpf}
-                            Patients={[]}
-                            setPatients={function (data: PatientModel[]): void {
-                                throw new Error("Function not implemented.");
-                            } }                        />
-                    ))}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full px-4">
+                        {Array.isArray(filteredPatients) && filteredPatients.map((patient) => (
+                            <PatientCard
+                                key={patient.id}
+                                name={patient.nome}
+                                cpf={patient.cpf}
+                                Patients={[]}
+                                setPatients={function (data: PatientModel[]): void {
+                                    throw new Error("Function not implemented.");
+                                }}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </GradientBackground>
