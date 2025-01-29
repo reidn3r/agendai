@@ -24,7 +24,6 @@ export default function Pacientes() {
         const fetchPatients = async () => {
             try {
                 const response = await axios.get("http://localhost:8080/patient/list");
-                console.log(response.data);
                 setPatients(response.data);
                 setFilteredPatients(response.data);
             } catch (error) {
@@ -78,12 +77,12 @@ export default function Pacientes() {
                         {Array.isArray(filteredPatients) && filteredPatients.map((patient) => (
                             <PatientCard
                                 key={patient.id}
+                                id={patient.id}
                                 name={patient.nome}
                                 cpf={patient.cpf}
-                                Patients={[]}
-                                setPatients={function (data: PatientModel[]): void {
-                                    throw new Error("Function not implemented.");
-                                }}
+                                Patients={patients}
+                                setFilteredPatients={setFilteredPatients}
+                                setPatients={setPatients}
                             />
                         ))}
                     </div>

@@ -8,22 +8,28 @@ import { PatientModel } from "@/models/PatientModel";
 import { Trash, User } from "lucide-react";
 
 
-export default function PatientCard({ name, cpf, Patients, setPatients } : {
+export default function PatientCard({ name, cpf, id, Patients, setPatients, setFilteredPatients } : {
+    id:string
     name:string, 
     cpf:string,
     Patients : PatientModel[],
-    setPatients: (data:PatientModel[]) => void
+    setPatients: (data:PatientModel[]) => void,
+    setFilteredPatients: (data:PatientModel[]) => void,
     }){
 
     const onConfirm = async() => {
         try{
-            const response = await axios.delete(`http://localhost:8080/professional/patient/delete/${cpf}`);
+            const response = await axios.delete(`http://localhost:8080/patient/delete/${id}`);
+            
             console.log(response);
-            const newArray = Patients.filter((s) => s.cpf !== cpf);
+            
+            const newArray = Patients.filter((s) => s.id != id);
             setPatients(newArray);
+            setFilteredPatients(newArray);
         }
         catch(err:any){
-            alert("Erro ao deletar secretária")
+            console.log(err);
+            alert("Erro ao deletar paciente")
         }
     }
 
@@ -47,6 +53,9 @@ export default function PatientCard({ name, cpf, Patients, setPatients } : {
                         Deletar
                     </button>
                 </AlertDialogTrigger>
+            <DeletePatientDialog
+                onConfirm={onConfirm}
+            />
             </AlertDialog>
         </div>
     );
