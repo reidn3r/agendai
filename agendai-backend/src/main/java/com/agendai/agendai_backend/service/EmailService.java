@@ -1,15 +1,12 @@
 package com.agendai.agendai_backend.service;
 
 import com.agendai.agendai_backend.DTO.Consultation.ConsultationResponseDTO;
-import com.agendai.agendai_backend.controller.EmailController;
 import com.agendai.agendai_backend.model.PatientModel;
 import com.agendai.agendai_backend.repository.ConsultationRepository;
 import com.agendai.agendai_backend.repository.PatientRepository;
-import jakarta.mail.Message;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;

@@ -13,7 +13,7 @@ public interface PatientRepository extends JpaRepository<PatientModel, UUID> {
 
     Optional<PatientModel> findByEmail(String email);
 
-    Optional<PatientModel> findByName(String name);
+    Optional<PatientModel> findByNome(String nome);
 
     Optional<PatientModel> findById(UUID id);
 }

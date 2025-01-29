@@ -49,5 +49,4 @@ public class PatientController {
     public ResponseEntity<List<PatientModel>> patientList() {
         return ResponseEntity.status(200).body(patientService.getPatientList());
     }
-
 }

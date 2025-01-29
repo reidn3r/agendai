@@ -57,8 +57,8 @@ public class PatientService {
         return patientRepository.findByEmail(email);
     }
 
-        public Optional<PatientModel> getPatientByName(String name) {
-        return patientRepository.findByName(name);
+    public Optional<PatientModel> getPatientByName(String nome) {
+        return patientRepository.findByNome(nome);
     }
 
     private boolean isValidPatient(PatientDTO data) throws Exception {
