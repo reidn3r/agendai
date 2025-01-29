@@ -2,6 +2,7 @@
 //Provavelmente precisa mudar
 export interface PatientModel {
     id: string;
-    name: string;
+    nome: string;
+    cpf: string;
     email: string;
 }

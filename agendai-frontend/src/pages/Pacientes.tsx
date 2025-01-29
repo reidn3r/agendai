@@ -33,11 +33,12 @@ export default function Pacientes() {
         fetchPatients();
     }, []);
 
-    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearch = (event:any) => {
         const term = event.target.value.toLowerCase();
         setSearchTerm(term);
         const filtered = patients.filter((patient) =>
-            patient.name.toLowerCase().includes(term)
+            patient.nome.toLowerCase().includes(term) ||
+            patient.id.includes(term)
         );
         setFilteredPatients(filtered);
     };
@@ -74,10 +75,12 @@ export default function Pacientes() {
                     {/* Renderizar lista de pacientes filtrados */}
                     {Array.isArray(filteredPatients) && filteredPatients.map((patient) => (
                         <PatientCard
-                            id={patient.id}
-                            name={patient.name}
-                            email={patient.email}
-                        />
+                            name={patient.nome}
+                            cpf={patient.cpf}
+                            Patients={[]}
+                            setPatients={function (data: PatientModel[]): void {
+                                throw new Error("Function not implemented.");
+                            } }                        />
                     ))}
                 </div>
             </div>
