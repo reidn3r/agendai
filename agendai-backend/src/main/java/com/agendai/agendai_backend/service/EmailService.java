@@ -29,11 +29,11 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    public EmailService(JavaMailSender mailSender){
+    public EmailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
 
-    public String emailConfirmacao(ConsultationResponseDTO consultationResponseDTO){
+    public String emailConfirmacao(ConsultationResponseDTO consultationResponseDTO) {
         try {
 
             MimeMessage message = mailSender.createMimeMessage();
@@ -61,18 +61,17 @@ public class EmailService {
             htmlContent = htmlContent.replace("{{ID}}", idConsulta.toString());
             htmlContent = htmlContent.replace("{{DATA}}", dataConsulta.toString());
             htmlContent = htmlContent.replace("{{NOME}}", nomePaciente);
-            htmlContent = htmlContent.replace("{{ENDPOINT}}", "http://localhost:8080/consultation/confirmar/" + idConsulta);
+            htmlContent = htmlContent.replace("{{ENDPOINT}}",
+                    "http://localhost:8080/consultation/confirmar/" + idConsulta);
 
-            System.out.println(htmlContent);
+            // System.out.println(htmlContent);
             helper.setText(htmlContent, true);
             mailSender.send(message);
 
             return "Email enviado!";
-        } catch (Exception e){
+        } catch (Exception e) {
             return e.getMessage();
         }
     }
-
-
 
 }

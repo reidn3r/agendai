@@ -82,8 +82,8 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         // Criando Pacientes
         PatientModel patient1 = new PatientModel();
-        patient1.setNome("Pedro Ferreira");
-        patient1.setEmail("pedro@email.com");
+        patient1.setNome("Vitor Padovani");
+        patient1.setEmail("ra128169@uem.br");
         patient1.setCpf("16230263009");
         patient1.setDataNascimento(LocalDate.of(1990, 5, 15));
         patient1.setTelefone("11999887766");
@@ -137,5 +137,9 @@ public class DatabaseSeeder implements CommandLineRunner {
         candidate2.setConsultation(null);
 
         candidatesRepository.saveAll(Arrays.asList(candidate1, candidate2));
+
+        System.out.println(secretary1.getId());
+        System.out.println(medic1.getId());
+        System.out.println(patient1.getId());
     }
 }
