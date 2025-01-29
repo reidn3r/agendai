@@ -9,6 +9,7 @@ import CreatePatientDialog from "@/components/patient/create-patient-dialog";
 import GradientBackground from "@/components/ui/gradient-background";
 import { useEffect, useState } from "react";
 import { PatientModel } from "@/models/PatientModel";
+import { user } from "@/layouts/root-layout";
 import axios from 'axios';
 
 
@@ -50,7 +51,7 @@ export default function Pacientes() {
         >
             <div>
                 <HelloHeader
-                    username="Lorem"
+                    username={user.nome}
                     message="Aqui está a lista de pacientes cadastrados"
                 />
 

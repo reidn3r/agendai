@@ -1,4 +1,4 @@
-import { Home, Users, Settings, LogOut, CrossIcon, BellIcon } from "lucide-react"
+import { Home, Users, LogOut, CrossIcon, BellIcon, CalendarArrowUp } from "lucide-react"
 import {
     Sidebar,
     SidebarContent,
@@ -48,16 +48,22 @@ export function AppSidebar({ user }: AppSidebarProps) {
                 }
             ]
             case "SECRETARIA":
-            return [
+                return [
                 {
-                title: "Pacientes",
-                url: "/pacientes",
-                icon: Settings
+                    title: "Pacientes",
+                    url: "/pacientes",
+                    icon: Users
+                    
+                },
+                {
+                    title: "Notificações",
+                    url: "/notificacoes",
+                    icon: BellIcon
                 },
                 {
                 title: "Consultas",
                 url: "/consultas",
-                icon: Users
+                icon: CalendarArrowUp
                 }
             ]
             default:

@@ -10,6 +10,7 @@ import GradientBackground from "@/components/ui/gradient-background";
 import { useEffect, useState } from "react";
 import { SecretariaModel } from "@/models/SecretariaModel";
 import axios from 'axios';
+import { user } from "@/layouts/root-layout";
 
 
 export default function Secretaria(){
@@ -38,7 +39,7 @@ export default function Secretaria(){
             >
             <div>
                 <HelloHeader
-                    username="Lorem"
+                    username={user.nome}
                     message="Aqui está a lista de secretárias cadastrados"
                 />
 

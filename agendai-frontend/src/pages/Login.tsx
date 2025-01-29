@@ -3,6 +3,7 @@ import GradientBackground from "@/components/ui/gradient-background";
 import { Mail, LockIcon } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { user } from "@/layouts/root-layout";
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -18,8 +19,12 @@ export default function Login() {
 
   function onSubmit(event: React.FormEvent) {
     event.preventDefault(); 
-    // console.log("Dados do formulário:", formData);
-    navigate("/consultas")
+
+    user.nome = "Renato Balancieri"
+    user.type = formData.email === "admin@email.com" ? "ADMIN" : "SECRETARIA";
+
+    const route:string = user.type === "ADMIN" ? "/secretaria" : "/consultas"
+    navigate(route);
   }
 
   return (

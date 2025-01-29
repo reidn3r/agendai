@@ -5,6 +5,7 @@ import GradientBackground from "@/components/ui/gradient-background";
 import { NotificationModel } from "@/models/NotificationModel";
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import { user } from "@/layouts/root-layout";
 
 export default function Notificacoes(){
 
@@ -22,7 +23,7 @@ export default function Notificacoes(){
         <GradientBackground firstColor="bg-[#4845D250]" secondColor="bg-[#4845D250]">
             <div>
                 <HelloHeader
-                    username="Lorem"
+                    username={user.nome}
                     message="Aqui está a lista de notificações enviadas"
                 />
                 <div className="flex flex-col items-center justify-center">

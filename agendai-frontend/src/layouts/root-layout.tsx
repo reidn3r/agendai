@@ -7,12 +7,12 @@ export type UserType = {
     type: "ADMIN" | "SECRETARIA" | "NONE"
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-    const user:UserType = {
-        nome: "Renato Balancieri",
-        type: "SECRETARIA"
-    }
+export const user:UserType = {
+    nome: "Renato Balancieri",
+    type: "SECRETARIA"
+}
 
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <SidebarProvider>
             <div className="flex min-h-screen w-full">
