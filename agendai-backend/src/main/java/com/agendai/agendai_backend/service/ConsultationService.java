@@ -100,8 +100,10 @@ public class ConsultationService {
         Optional<ConsultationModel> consultaOptional = consultationRepository.findById(id);
         if(consultaOptional.isPresent()){
             ConsultationModel consulta = consultaOptional.get();
-            consulta.setEstado("CONFIRMADA");
-            return consultationRepository.save(consulta);
+            if((consulta.getEstado()).equals("PENDENTE")){
+                consulta.setEstado("CONFIRMADA");
+                return consultationRepository.save(consulta);
+            } else throw new RuntimeException("Consulta já foi confirmada. Contate nossa clínica para mais informações.");
         }
         throw new RuntimeException("Consulta não encontrada, com o ID:" + id);
     }
