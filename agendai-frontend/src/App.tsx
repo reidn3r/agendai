@@ -18,7 +18,6 @@ export default function App() {
             <Route path="/secretaria" element={<Secretaria />} />
             <Route path="/notificacoes" element={<Notificacoes />} />
             <Route path="/pacientes" element={<Pacientes />} />
-            
             <Route path="/create-paciente" element={<CreatePaciente />} />
           </Routes>
         </div>
