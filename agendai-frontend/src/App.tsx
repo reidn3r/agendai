@@ -1,27 +1,95 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./context/ProtectedRoute";
 import Login from "./pages/Login";
 import RootLayout from "./layouts/root-layout";
 import Secretaria from "./pages/Secretaria";
 import Home from "./pages/Home";
 import Notificacoes from "./pages/Notificacoes";
 import Pacientes from "./pages/Pacientes";
-import CreatePaciente from "./pages/CreatePaciente";  // Importe o arquivo CreatePaciente.tsx
+import CreatePaciente from "./pages/CreatePaciente";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <RootLayout>
-        <div className="bg-[#18181B] w-full min-h-screen text-white">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/secretaria" element={<Secretaria />} />
-            <Route path="/notificacoes" element={<Notificacoes />} />
-            <Route path="/pacientes" element={<Pacientes />} />
-            <Route path="/create-paciente" element={<CreatePaciente />} />
-          </Routes>
-        </div>
-      </RootLayout>
+      <AuthProvider>
+        <Routes>
+          {/* Rotas públicas - sem autenticação */}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+
+          {/* Rotas protegidas - apenas ADMIN */}
+          <Route
+            path="/secretaria"
+            element={
+              <ProtectedRoute allowedRoles={["ADMIN"]}>
+                <RootLayout>
+                  <div className="bg-[#18181B] w-full min-h-screen text-white">
+                    <Secretaria />
+                  </div>
+                </RootLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Rotas protegidas - ADMIN e SECRETARIA */}
+          <Route
+            path="/notificacoes"
+            element={
+              <ProtectedRoute allowedRoles={["ADMIN", "SECRETARIA"]}>
+                <RootLayout>
+                  <div className="bg-[#18181B] w-full min-h-screen text-white">
+                    <Notificacoes />
+                  </div>
+                </RootLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Rotas protegidas - apenas SECRETARIA */}
+          <Route
+            path="/pacientes"
+            element={
+              <ProtectedRoute allowedRoles={["SECRETARIA"]}>
+                <RootLayout>
+                  <div className="bg-[#18181B] w-full min-h-screen text-white">
+                    <Pacientes />
+                  </div>
+                </RootLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/create-paciente"
+            element={
+              <ProtectedRoute allowedRoles={["SECRETARIA"]}>
+                <RootLayout>
+                  <div className="bg-[#18181B] w-full min-h-screen text-white">
+                    <CreatePaciente />
+                  </div>
+                </RootLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Adicione aqui outras rotas protegidas conforme necessário */}
+          {/* Exemplo para rota de consultas (SECRETARIA): */}
+          {/* 
+          <Route
+            path="/consultas"
+            element={
+              <ProtectedRoute allowedRoles={["SECRETARIA"]}>
+                <RootLayout>
+                  <div className="bg-[#18181B] w-full min-h-screen text-white">
+                    <Consultas />
+                  </div>
+                </RootLayout>
+              </ProtectedRoute>
+            }
+          />
+          */}
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

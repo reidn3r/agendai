@@ -105,6 +105,7 @@ public class ProfessionalService {
 
         SecretaryModel savedSecretary = secretaryRepository.save(newSecretary);
         UserModel user = new UserModel(
+                data.name(),
                 data.email(),
                 hashedPassword,
                 UserRole.SECRETARY,

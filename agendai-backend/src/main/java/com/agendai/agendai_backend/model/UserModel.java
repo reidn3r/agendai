@@ -32,6 +32,9 @@ public class UserModel {
     private UUID id;
 
     @NotNull
+    private String name;
+
+    @NotNull
     private String email;
 
     @NotNull
@@ -48,11 +51,16 @@ public class UserModel {
     @JoinColumn(name = "secretary_id")
     private SecretaryModel secretary;
 
-    public UserModel(String email, String password, UserRole role, String cpf, SecretaryModel secretary) {
+    public UserModel(String name, String email, String password, UserRole role, String cpf, SecretaryModel secretary) {
+        this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
         this.cpf = cpf;
         this.secretary = secretary;
+    }
+
+    public boolean checkPassword(String password2) {
+        return this.password == password2;
     }
 }

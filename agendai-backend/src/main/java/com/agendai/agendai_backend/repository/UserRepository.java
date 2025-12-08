@@ -11,4 +11,8 @@ import com.agendai.agendai_backend.model.UserModel;
 public interface UserRepository extends JpaRepository<UserModel, UUID> {
 
     public void deleteByCpf(String cpf);
+
+    public UserModel findByName(String name);
+
+    public UserModel findByEmail(String email);
 }
