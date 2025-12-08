@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import api from '@/lib/axiosConfig';
+import axios from "axios";
 
 export type UserType = {
   nome: string;
@@ -47,7 +48,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await api.post('/api/auth/login', { 
+      const response = await axios.post("http://localhost:8080/api/auth/login", {
         username: email, // O backend espera "username"
         password 
       });

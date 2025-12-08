@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/login", "/api/auth/logout").permitAll()
                 // Rotas protegidas
                 .requestMatchers("/api/auth/me").authenticated()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
             )
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

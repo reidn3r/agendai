@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.agendai.agendai_backend.DTO.User.UserRole;
+import com.agendai.agendai_backend.service.PasswordService;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -61,6 +62,7 @@ public class UserModel {
     }
 
     public boolean checkPassword(String password2) {
-        return this.password == password2;
+        PasswordService passwordService = new PasswordService();
+        return passwordService.passwordMatches(password2, this.password);
     }
 }

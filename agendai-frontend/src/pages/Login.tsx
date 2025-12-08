@@ -4,8 +4,12 @@ import { Mail, LockIcon } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { user } from "@/layouts/root-layout";
+import { useAuth } from "@/context/AuthContext";
+import toast from 'react-hot-toast';
 
 export default function Login() {
+  const { user, login } = useAuth();
+
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
@@ -17,13 +21,20 @@ export default function Login() {
     }));
   }
 
-  function onSubmit(event: React.FormEvent) {
+  async function onSubmit(event: React.FormEvent) {
     event.preventDefault(); 
 
-    user.nome = "Renato Balancieri"
-    user.type = formData.email === "admin@email.com" ? "ADMIN" : "SECRETARIA";
+    // user.nome = "Renato Balancieri"
+    // user.type = formData.email === "admin@email.com" ? "ADMIN" : "SECRETARIA";
 
-    const route:string = user.type === "ADMIN" ? "/secretaria" : "/consultas"
+    await login(formData.email, formData.password)
+
+    if (user == null) {
+      toast.error("Usuário inválido");
+      return;
+    }
+
+    const route:string = user.type === "ADMIN" ? "/secretaria" : "/notificacoes"
     navigate(route);
   }
 

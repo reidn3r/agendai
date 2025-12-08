@@ -19,13 +19,28 @@ public class AuthenticationService {
     private JwtService jwtService;
 
     public AuthResponse login(LoginDTO login) {
-        UserModel user = userRepo.findByEmail(login.username);
+        UserModel user = userRepo.findByEmail(login.getUsername());
+
+        
+        System.err.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.err.println("--------------------------------------------------------------------");
+        System.err.println(login.getUsername());
+        System.err.println(login.getPassword());
+        System.err.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
         if (user == null) {
             throw new RuntimeException("Usuário não encontrado");
         }
 
-        if (!user.checkPassword(login.password)) {
+        System.err.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.err.println("--------------------------------------------------------------------");
+        System.err.println(user.getName());
+        System.err.println(login.getUsername());
+        System.err.println(user.getPassword());
+        System.err.println(login.getPassword());
+        System.err.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+        if (!user.checkPassword(login.getPassword())) {
             throw new RuntimeException("Senha inválida");
         }
 
@@ -40,6 +55,8 @@ public class AuthenticationService {
 
         // Criar AuthResponse com token e user
         AuthResponse res = new AuthResponse(token, userResponse);
+
+        System.err.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
         return res;
     }
