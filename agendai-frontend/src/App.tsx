@@ -6,6 +6,7 @@ import RootLayout from "./layouts/root-layout";
 import Secretaria from "./pages/Secretaria";
 import Home from "./pages/Home";
 import Notificacoes from "./pages/Notificacoes";
+import Consultas from "./pages/Consultas";
 import Pacientes from "./pages/Pacientes";
 import CreatePaciente from "./pages/CreatePaciente";
 
@@ -72,9 +73,6 @@ export default function App() {
             }
           />
 
-          {/* Adicione aqui outras rotas protegidas conforme necessário */}
-          {/* Exemplo para rota de consultas (SECRETARIA): */}
-          {/* 
           <Route
             path="/consultas"
             element={
@@ -87,7 +85,6 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-          */}
         </Routes>
       </AuthProvider>
     </BrowserRouter>

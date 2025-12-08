@@ -1,10 +1,16 @@
 package com.agendai.agendai_backend.controller;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import com.agendai.agendai_backend.model.ConsultationModel;
+import com.agendai.agendai_backend.model.NotificationModel;
+import com.agendai.agendai_backend.repository.ConsultationRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +31,19 @@ public class ConsultationController {
 
     @Autowired
     private ConsultationService consultationService;
+
+    @Autowired
+    private ConsultationRepository consultationRepository;
+
+    @GetMapping("/list")
+    @CrossOrigin
+    public ResponseEntity<List<ConsultationResponseDTO>> getConsultation() {
+        List<ConsultationModel> consultations = consultationRepository.findAll();
+        List<ConsultationResponseDTO> notificationDTOs = consultations.stream()
+                .map(ConsultationResponseDTO::fromModel)
+                .collect(Collectors.toList());
+        return ResponseEntity.status(200).body(notificationDTOs);
+    }
 
     @GetMapping("/confirmar/{id}")
     public ResponseEntity<ConsultationModel> confirmacaoDaConsulta(@PathVariable UUID id) throws Exception{
