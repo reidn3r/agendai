@@ -73,18 +73,18 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         // Criando Usuários para as secretárias
         UserModel user1 = new UserModel(
-                "Ana",
+                secretary1.getName(),
                 "ana@clinica.com",
                 passwordService.hashPassword("senha123"),
                 UserRole.SECRETARY,
-                "66674980072",
+                secretary1.getCpf(),
                 secretary1);
         UserModel user2 = new UserModel(
-                "Carlos",
+                secretary2.getName(),
                 "carlos@clinica.com",
                 passwordService.hashPassword("senha456"),
                 UserRole.SECRETARY,
-                "17449254026",
+                secretary2.getCpf(),
                 secretary2);
         userRepository.saveAll(Arrays.asList(user1, user2));
 

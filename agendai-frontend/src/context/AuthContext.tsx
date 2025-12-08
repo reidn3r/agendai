@@ -3,6 +3,7 @@ import api from '@/lib/axiosConfig';
 import axios from "axios";
 
 export type UserType = {
+    id: string;
   nome: string;
   type: "ADMIN" | "SECRETARIA" | "NONE";
   email?: string;

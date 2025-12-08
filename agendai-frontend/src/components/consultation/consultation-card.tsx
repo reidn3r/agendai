@@ -6,10 +6,10 @@ import { AlertDialog, AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
 
 export default function ConsultationCard({ consultation }: { consultation: ConsultationModel }) {
 
-    const deleteConsultation = async () => {
-        const response = await axios.get("http://localhost:8080/consultation/list");
-        setNotifications(response.data);
-    }
+    // const deleteConsultation = async () => {
+    //     const response = await axios.get("http://localhost:8080/consultation/list");
+    //     setNotifications(response.data);
+    // }
 
     return (
     <div className="flex flex-row items-center p-4 my-2 rounded-md shadow-lg border border-neutral-950/50 bg-[#171717] hover:shadow-xl transition-shadow duration-300">

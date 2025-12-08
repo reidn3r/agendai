@@ -53,6 +53,7 @@ public class ConsultationController {
     @PostMapping("/create")
     public ResponseEntity<ConsultationResponseDTO> createConsultation(@RequestBody @Valid ConsultationDTO data)
             throws Exception {
+                System.err.println("\n\n\n\n\n\n\n\n\n\n\n-----\n\n\n\n\n\n");
         return ResponseEntity.status(201).body(consultationService.createConsultation(data));
     }
 

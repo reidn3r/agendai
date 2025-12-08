@@ -48,6 +48,7 @@ public class AuthenticationService {
 
         // Criar UserResponse
         UserResponse userResponse = new UserResponse(
+            user.getId(),
             user.getName(),
             getUserType(user), // Método para determinar o tipo do usuário
             user.getEmail()
@@ -80,6 +81,7 @@ public class AuthenticationService {
 
             // Retornar dados do usuário
             return new UserResponse(
+                user.getId(),
                 user.getName(),
                 getUserType(user),
                 user.getEmail()

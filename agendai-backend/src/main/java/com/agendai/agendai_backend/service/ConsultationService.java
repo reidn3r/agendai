@@ -17,11 +17,13 @@ import com.agendai.agendai_backend.model.ConsultationModel;
 import com.agendai.agendai_backend.model.MedicModel;
 import com.agendai.agendai_backend.model.PatientModel;
 import com.agendai.agendai_backend.model.SecretaryModel;
+import com.agendai.agendai_backend.model.UserModel;
 import com.agendai.agendai_backend.repository.CandidatesRepository;
 import com.agendai.agendai_backend.repository.ConsultationRepository;
 import com.agendai.agendai_backend.repository.MedicRepositroy;
 import com.agendai.agendai_backend.repository.PatientRepository;
 import com.agendai.agendai_backend.repository.SecretaryRepository;
+import com.agendai.agendai_backend.repository.UserRepository;
 
 @Service
 public class ConsultationService {
@@ -31,6 +33,9 @@ public class ConsultationService {
 
     @Autowired
     private SecretaryRepository secretaryRepository;
+
+    @Autowired
+    UserRepository userRepo;
 
     @Autowired
     private PatientRepository patientRepository;
@@ -161,7 +166,10 @@ public class ConsultationService {
         if (foundMedic.isEmpty())
             throw new Exception("Médico não encontrado");
 
-        Optional<SecretaryModel> foundSecretary = secretaryRepository.findById(data.secretaryId());
+        UserModel user = userRepo.findById(data.secretaryId())
+            .orElseThrow(() -> new Exception("Usuário associado à secretária não encontrado"));
+
+        Optional<SecretaryModel> foundSecretary = secretaryRepository.findByCpf(user.getCpf());
         if (foundSecretary.isEmpty())
             throw new Exception("Secretária não encontrada");
 

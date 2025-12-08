@@ -9,3 +9,11 @@ export interface ConsultationModel {
   patientId: string;
   patientName: string;
 }
+
+
+export interface ConsultationCreateDTO {
+    date: string;       // LocalDateTime em formato ISO
+    secretaryId: string;
+    medicId: string;
+    patientId: string;
+}
